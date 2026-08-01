@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#0B0F0E}
+  body{font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:#4FD3AA;text-decoration:none}
+  a:hover{color:#7FE6C6}
+</style>
+</helmet>
+
+<div style="background:#0B0F0E;color:#F2F5F3;min-height:100vh;padding:52px 32px 100px">
+  <div style="max-width:900px;margin:0 auto">
+
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.09)">
+      <div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#7FE6C6">Deliverable 03</div>
+        <h1 style="margin:12px 0 0;font-size:44px;font-weight:800;letter-spacing:-.035em;line-height:1.05">Process, tools, timing</h1>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="./Finout Homepage Concept.dc.html" style="padding:11px 17px;border-radius:10px;border:1px solid rgba(255,255,255,.16);color:#F2F5F3;font-size:13.5px;font-weight:700">Homepage</a>
+        <a href="./Finout LinkedIn Banners.dc.html" style="padding:11px 17px;border-radius:10px;border:1px solid rgba(255,255,255,.16);color:#F2F5F3;font-size:13.5px;font-weight:700">Banners</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px">
+      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+        <div style="border-radius:14px;border:1px solid rgba(255,255,255,.09);background:#121917;padding:16px 17px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:500;letter-spacing:-.02em;color:{{ s.color }}">{{ s.stat }}</div>
+          <div style="font-size:11.5px;font-weight:600;color:#8A9A94;margin-top:5px;line-height:1.35">{{ s.label }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="margin-top:46px">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#5F736C;margin-bottom:20px">The direction, in two sentences</div>
+      <div style="font-size:24px;line-height:1.42;font-weight:600;letter-spacing:-.02em;text-wrap:pretty">
+        The homepage stops describing the product and starts running it: ask Billy a real cost question in the hero and the illustrated Finout world reacts &mdash; telescope scans, MegaBill rebuilds, V-Tags land on owners, savings tick up. The second fold then turns &ldquo;the best allocation engine in the market&rdquo; from a claim into a four-step proof you can watch assemble itself, so the scroll is rewarded instead of merely tolerated.
+      </div>
+    </div>
+
+    <div style="margin-top:52px">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#5F736C;margin-bottom:20px">Timeline &mdash; how it actually went</div>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ phases }}" as="p" hint-placeholder-count="6">
+          <div style="display:grid;grid-template-columns:78px 1fr;gap:20px;padding:18px 0;border-top:1px solid rgba(255,255,255,.08)">
+            <div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD3AA">{{ p.time }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F736C;margin-top:3px">{{ p.cum }}</div>
+            </div>
+            <div>
+              <div style="font-size:16px;font-weight:700;letter-spacing:-.015em">{{ p.title }}</div>
+              <div style="font-size:13.5px;line-height:1.6;color:#9DABA6;margin-top:6px;text-wrap:pretty">{{ p.body }}</div>
+              <div style="display:flex;gap:7px;margin-top:11px;flex-wrap:wrap">
+                <sc-for list="{{ p.tools }}" as="t" hint-placeholder-count="2">
+                  <span style="padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#B4C2BD">{{ t }}</span>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="margin-top:52px">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#5F736C;margin-bottom:8px">Intermediate iterations</div>
+      <div style="font-size:14px;line-height:1.6;color:#9DABA6;margin-bottom:20px;max-width:640px;text-wrap:pretty">Three versions of the hero before the one that shipped. Click through them &mdash; the interesting part is what got cut.</div>
+
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+        <sc-for list="{{ iters }}" as="i" hint-placeholder-count="3">
+          <div onClick="{{ i.go }}" style="cursor:pointer;padding:10px 15px;border-radius:10px;border:1px solid {{ i.bd }};background:{{ i.bg }};color:{{ i.fg }};font-size:13px;font-weight:700;transition:all .25s">{{ i.label }}</div>
+        </sc-for>
+      </div>
+
+      <div style="border-radius:18px;border:1px solid rgba(255,255,255,.09);background:#121917;overflow:hidden">
+        <div style="padding:20px 22px 0">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <div style="font-size:19px;font-weight:800;letter-spacing:-.02em">{{ iterTitle }}</div>
+            <div style="padding:4px 10px;border-radius:6px;background:{{ verdictBg }};color:{{ verdictFg }};font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase">{{ verdict }}</div>
+          </div>
+          <div style="font-size:14px;line-height:1.6;color:#9DABA6;margin-top:9px;text-wrap:pretty">{{ iterBody }}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.65;color:#7FE6C6;margin-top:14px;padding:12px 14px;border-radius:10px;background:rgba(79,211,170,.06);border:1px solid rgba(79,211,170,.16);text-wrap:pretty">{{ iterPrompt }}</div>
+        </div>
+
+        <div style="margin:20px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:{{ mockBg }};height:250px;position:relative;overflow:hidden;transition:background .4s">
+          <div style="position:absolute;left:0;right:0;top:0;height:34px;display:flex;align-items:center;gap:7px;padding:0 13px;border-bottom:1px solid rgba(255,255,255,.07)">
+            <div style="width:8px;height:8px;border-radius:50%;background:#3A4A45"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#3A4A45"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#3A4A45"></div>
+            <div style="margin-left:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:{{ mockMuted }}">finout.io &mdash; {{ iterLabel }}</div>
+          </div>
+          <div style="position:absolute;left:0;right:0;top:34px;bottom:0;padding:22px 26px">
+            <sc-for list="{{ mock }}" as="m" hint-placeholder-count="5">
+              <div style="height:{{ m.h }};width:{{ m.w }};border-radius:{{ m.r }};background:{{ m.c }};margin-bottom:{{ m.mb }};margin-left:{{ m.ml }};border:{{ m.bd }}"></div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:52px;display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <div style="border-radius:16px;border:1px solid rgba(255,255,255,.09);background:#121917;padding:22px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#7FE6C6;margin-bottom:14px">How brand consistency held</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ brandRules }}" as="b" hint-placeholder-count="5">
+            <div style="display:flex;gap:10px">
+              <span style="flex:none;width:5px;height:5px;border-radius:50%;background:#4FD3AA;margin-top:7px"></span>
+              <div style="font-size:13.5px;line-height:1.55;color:#B4C2BD;text-wrap:pretty">{{ b }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:18px;flex-wrap:wrap">
+          <sc-for list="{{ palette }}" as="p" hint-placeholder-count="5">
+            <div style="text-align:center">
+              <div style="width:52px;height:36px;border-radius:8px;background:{{ p.hex }};border:1px solid rgba(255,255,255,.12)"></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#7C8B85;margin-top:5px">{{ p.hex }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="border-radius:16px;border:1px solid rgba(255,255,255,.09);background:#121917;padding:22px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#E8B268;margin-bottom:14px">Stack</div>
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <sc-for list="{{ stack }}" as="s" hint-placeholder-count="6">
+            <div style="display:flex;align-items:baseline;gap:10px;padding-bottom:11px;border-bottom:1px solid rgba(255,255,255,.06)">
+              <div style="font-size:13.5px;font-weight:700;min-width:118px">{{ s.tool }}</div>
+              <div style="font-size:12.5px;line-height:1.5;color:#9DABA6;text-wrap:pretty">{{ s.use }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:44px;padding:24px 26px;border-radius:16px;border:1px solid rgba(232,178,104,.2);background:linear-gradient(120deg,rgba(232,178,104,.06),rgba(232,178,104,.02))">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#E8B268;margin-bottom:11px">Honest notes</div>
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <sc-for list="{{ notes }}" as="n" hint-placeholder-count="3">
+          <div style="font-size:13.5px;line-height:1.6;color:#C4D1CC;text-wrap:pretty">{{ n }}</div>
+        </sc-for>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1000,&quot;height&quot;:900}}">
+const ITERS = [
+  {
+    label: 'v1 — Static polish',
+    title: 'v1 · Just make it prettier',
+    verdict: 'killed',
+    vg: 'red',
+    body: 'First pass kept the existing three-panel hero and only raised the craft: deeper glow, better type scale, product panels tilted in 3D. It looked more expensive and did absolutely nothing new. No reason to scroll, no reason to touch anything.',
+    prompt: 'prompt → "restyle the Finout hero: keep the 3 floating dashboards, add depth, richer dark-green field, tighter type. Do not change the content."',
+    mock: [
+      { h: '10px', w: '30%', r: '5px', c: 'rgba(79,211,170,.3)', mb: '14px', ml: '0', bd: 'none' },
+      { h: '26px', w: '62%', r: '6px', c: 'rgba(255,255,255,.14)', mb: '9px', ml: '0', bd: 'none' },
+      { h: '26px', w: '44%', r: '6px', c: 'rgba(255,255,255,.14)', mb: '20px', ml: '0', bd: 'none' },
+      { h: '90px', w: '100%', r: '10px', c: 'rgba(255,255,255,.05)', mb: '0', ml: '0', bd: '1px solid rgba(255,255,255,.09)' }
+    ],
+    bg: '#101715'
+  },
+  {
+    label: 'v2 — Scroll cinema',
+    title: 'v2 · Scroll-jacked cinematic world',
+    verdict: 'cut back',
+    vg: 'amber',
+    body: 'A single continuous illustrated landscape that transformed across four pinned scroll stages. Genuinely impressive, and wrong for an enterprise buyer: the product disappeared for whole seconds and the fastest path to information got slower. Kept the self-assembly idea, dropped the scroll hijack.',
+    prompt: 'prompt → "scroll-driven hero: one isometric world, 4 pinned stages, cloud objects assemble into a landscape as the user scrolls. Product UI enters at stage 3."',
+    mock: [
+      { h: '150px', w: '100%', r: '10px', c: 'rgba(79,211,170,.09)', mb: '12px', ml: '0', bd: '1px solid rgba(79,211,170,.18)' },
+      { h: '8px', w: '20%', r: '4px', c: 'rgba(255,255,255,.18)', mb: '7px', ml: '40%', bd: 'none' },
+      { h: '8px', w: '12%', r: '4px', c: 'rgba(255,255,255,.1)', mb: '0', ml: '44%', bd: 'none' }
+    ],
+    bg: '#0F1614'
+  },
+  {
+    label: 'v3 — Shipped',
+    title: 'v3 · Ask Billy, watch it work',
+    verdict: 'shipped',
+    vg: 'mint',
+    body: 'The prompt console moved above the fold as the primary CTA, and every answer drives the illustration AND the product UI at once. First interaction lands inside four seconds, the answer is worth waiting for, and fold two rewards the scroll with a watchable allocation proof. Motion serves the argument instead of replacing it.',
+    prompt: 'prompt → "hero = live agent console. On ask: telescope scans, windmill spins up, MegaBill bars redraw, table rows allocate one by one with V-Tag chips, savings counter runs. Restrained, enterprise, no scroll-jack."',
+    mock: [
+      { h: '9px', w: '26%', r: '5px', c: 'rgba(79,211,170,.35)', mb: '12px', ml: '0', bd: 'none' },
+      { h: '24px', w: '54%', r: '6px', c: 'rgba(255,255,255,.18)', mb: '14px', ml: '0', bd: 'none' },
+      { h: '40px', w: '100%', r: '10px', c: 'rgba(79,211,170,.1)', mb: '12px', ml: '0', bd: '1px solid rgba(79,211,170,.3)' },
+      { h: '78px', w: '100%', r: '10px', c: 'rgba(255,255,255,.05)', mb: '0', ml: '0', bd: '1px solid rgba(255,255,255,.1)' }
+    ],
+    bg: '#121A17'
+  }
+];
+
+class Component extends DCLogic {
+  state = { i: 2 };
+
+  renderVals() {
+    const it = ITERS[this.state.i];
+    const vmap = {
+      red: { bg: 'rgba(226,121,95,.16)', fg: '#E2795F' },
+      amber: { bg: 'rgba(232,178,104,.16)', fg: '#E8B268' },
+      mint: { bg: 'rgba(79,211,170,.16)', fg: '#7FE6C6' }
+    };
+    return {
+      stats: [
+        { stat: '6h 40m', label: 'total, across two sittings', color: '#4FD3AA' },
+        { stat: '3', label: 'hero directions built, 2 killed', color: '#F2F5F3' },
+        { stat: '4', label: 'image prompts, 11 renders', color: '#E8B268' },
+        { stat: '0', label: 'new brand colors introduced', color: '#F2F5F3' }
+      ],
+      phases: [
+        { time: '0:40', cum: '0:40', title: 'Brand teardown before anything visual', body: 'Pulled the live homepage, the MegaBill docs, and the media kit into an AI workspace and had it extract the actual system: hex values, the illustrated cast (windmill, telescope, cloud, Lego blocks), type scale, and how product UI is staged. Everything after this referenced that sheet instead of my memory.', tools: ['Claude', 'finout.io', 'docs.finout.io'] },
+        { time: '0:35', cum: '1:15', title: 'Product reconstruction', body: 'No product SVGs were available, so I rebuilt MegaBill from the documentation: AI Filter, saved views, Daily/Last-30-days controls, total + avg + share stats, stacked bars with the "Others" bucket and event annotations, and the allocation table with previous-period deltas in green/red. Hand-built in HTML/CSS so it animates and stays crisp at any size.', tools: ['Claude', 'docs.finout.io'] },
+        { time: '1:10', cum: '2:25', title: 'Three hero directions, in parallel', body: 'Generated all three as working code, not mockups — cheaper to judge motion by feeling it. v1 and v2 died on contact for the reasons in the iteration panel below.', tools: ['Claude', 'Chrome'] },
+        { time: '2:05', cum: '4:30', title: 'Building v3 for real', body: 'The agent console, the scan-and-rebuild choreography, the four-step allocation proof with 36 cost blocks flying into owner buckets, and the coverage meter. Most of the time went into timing curves — the answer has to feel earned but never slow.', tools: ['Claude', 'Chrome DevTools'] },
+        { time: '1:20', cum: '5:50', title: 'Banners + image generation', body: 'Composed both banner layouts to the brand grid first, then wrote prompts targeted at the exact holes. Eleven renders, four kept, background hexes matched by hand so they sit flush against the layout.', tools: ['Midjourney v7', 'Photoshop', 'Claude'] },
+        { time: '0:50', cum: '6:40', title: 'Consistency pass and this write-up', body: 'Swept every hex, radius, and type size against the teardown sheet; killed two colors that had crept in; checked the pair of banners side by side as they would appear in a feed.', tools: ['Claude', 'Figma'] }
+      ],
+      iters: ITERS.map((x, i) => ({
+        label: x.label,
+        go: () => this.setState({ i }),
+        bd: i === this.state.i ? 'rgba(79,211,170,.5)' : 'rgba(255,255,255,.1)',
+        bg: i === this.state.i ? 'rgba(79,211,170,.1)' : 'rgba(255,255,255,.03)',
+        fg: i === this.state.i ? '#7FE6C6' : '#9DABA6'
+      })),
+      iterTitle: it.title,
+      iterBody: it.body,
+      iterPrompt: it.prompt,
+      iterLabel: it.label,
+      verdict: it.verdict,
+      verdictBg: vmap[it.vg].bg,
+      verdictFg: vmap[it.vg].fg,
+      mock: it.mock,
+      mockBg: it.bg,
+      mockMuted: '#4F625C',
+      brandRules: [
+        'One extraction sheet up front, referenced by every later prompt — no color, radius, or font chosen from memory.',
+        'Zero new brand colors. Mint stays the only hero accent; amber and coral appear only where the product already uses them, as data states.',
+        'The illustrated cast was animated, not redrawn — the windmill spins faster when agents act, the telescope actually scans. Same objects, new behavior.',
+        'Product UI reconstructed from the documentation rather than approximated, so the demo shows real MegaBill vocabulary: V-Tags, Others bucket, previous-period deltas.',
+        'The mint underline device from the allocation fold is reused in banner 02 — one system across page and paid.'
+      ],
+      palette: [
+        { hex: '#0E1311' }, { hex: '#4FD3AA' }, { hex: '#2A8E70' }, { hex: '#E8B268' }, { hex: '#F3F5F2' }
+      ],
+      stack: [
+        { tool: 'Claude', use: 'Brand teardown, all three hero builds, the product UI reconstruction, copy passes.' },
+        { tool: 'Midjourney v7', use: 'The two banner illustrations. --style raw, stylize 180, 16:9.' },
+        { tool: 'Photoshop', use: 'Background hex matching and edge cleanup on the renders.' },
+        { tool: 'Figma', use: 'Side-by-side consistency check against the live site and the media kit.' },
+        { tool: 'Chrome DevTools', use: 'Timing curves and the reduced-motion pass.' },
+        { tool: 'finout.io + docs', use: 'Source of truth for the palette, the cast, and every product control.' }
+      ],
+      notes: [
+        'The illustrated objects here are CSS-composed stand-ins so they could animate on demand. In production they swap for the real 3D renders on the same transforms — the choreography is the deliverable, not the geometry.',
+        'v2 (the scroll-jacked world) is the one I would still like to build, as a dedicated /agents page where a long cinematic scroll is appropriate. On the homepage it cost more than it earned.',
+        'Numbers in the demo are illustrative and shaped to be plausible against your published customer results — worth swapping for a real anonymized account before anything ships.'
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

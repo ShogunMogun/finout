@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#EAF3FB}
+  body{font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:#1B1F1D}
+  a{color:#1F8F70;text-decoration:none}
+  a:hover{color:#38B28E}
+  ::selection{background:#FFD632;color:#1B1F1D}
+  @font-face{font-family:'PP Mondwest';src:url('./assets/ppmondwest-regular.otf') format('opentype');font-weight:400;font-display:swap}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  @keyframes bobFlip{0%,100%{transform:scaleX(-1) translateY(0)}50%{transform:scaleX(-1) translateY(-7px)}}
+  @keyframes twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.3) rotate(20deg)}}
+  @keyframes swipeA{0%{transform:translateX(-90px) skewX(-20deg)}11%,100%{transform:translateX(300px) skewX(-20deg)}}
+  @keyframes roll{from{background-position:0 0}to{background-position:0 -420px}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;padding:52px 32px 104px">
+  <div ref="{{ hostRef }}" style="max-width:1180px;margin:0 auto">
+
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;padding-bottom:24px;border-bottom:2px solid #1B1F1D">
+      <div>
+        <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#1F8F70">Deliverable 02</div>
+        <h1 style="font-family:Poppins,sans-serif;margin:12px 0 0;font-size:46px;font-weight:600;letter-spacing:-.035em;line-height:1.04">LinkedIn banners</h1>
+        <p style="margin:12px 0 0;max-width:660px;font-size:15.5px;line-height:1.55;color:#4A5551;text-wrap:pretty">Two 1584&times;396 banners cut straight out of the homepage: the same Lego brick road, the same pixel display face, the same ink-outlined cloud sky and the same marker highlight. Not campaign art &mdash; the site, cropped.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="./Finout Sky Road Lego.dc.html" style="padding:11px 18px;border-radius:11px;background:#FFFFFF;border:2px solid #1B1F1D;color:#1B1F1D;font-family:Poppins,sans-serif;font-size:13.5px;font-weight:600">&larr; The homepage</a>
+        <a href="./Finout Process.dc.html" style="padding:11px 18px;border-radius:11px;background:#38B28E;border:2px solid #1B1F1D;color:#1B1F1D;font-family:Poppins,sans-serif;font-size:13.5px;font-weight:600">Process &rarr;</a>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;margin:44px 0 14px;flex-wrap:wrap">
+      <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;color:#1F8F70">01</div>
+      <div style="font-family:Poppins,sans-serif;font-size:17px;font-weight:600;letter-spacing:-.02em">The road &mdash; company page cover</div>
+      <div style="margin-left:auto;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;color:#7B8580">1584 &times; 396</div>
+    </div>
+
+    <div style="position:relative;width:100%;height:{{ frameH }};overflow:hidden;border-radius:10px;border:2px solid #1B1F1D;box-shadow:0 22px 44px -30px rgba(27,31,29,.5)">
+      <div style="position:absolute;left:0;top:0;width:1584px;height:396px;transform:scale({{ scale }});transform-origin:top left;overflow:hidden;background:linear-gradient(180deg,#9EC9F2 0%,#BEDDF9 34%,#D8EAFC 66%,#EDF6FE 100%)">
+
+        <div style="position:absolute;inset:-2px;background-image:linear-gradient(to right,rgba(27,31,29,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(27,31,29,.07) 1px,transparent 1px);background-size:104px 104px"></div>
+
+        <img src="./assets/sun.svg" alt="" style="position:absolute;right:238px;top:-206px;width:400px;display:block;opacity:.96" />
+
+        <div style="position:absolute;right:104px;bottom:-58px;width:430px;height:470px;perspective:520px;perspective-origin:50% 0%">
+          <div style="position:absolute;left:0;right:0;bottom:0;height:1240px;transform:rotateX(74deg);transform-origin:50% 100%;background:url(./assets/road-4.svg) top center/100% auto repeat-y;animation:roll 9s linear infinite"></div>
+        </div>
+
+        <img src="./assets/sky-clouds-v3.svg" alt="" style="position:absolute;left:-4%;right:-4%;bottom:-30px;width:108%;display:block;opacity:.95" />
+        <img src="./assets/cloud-two-v4.svg" alt="" style="position:absolute;left:-46px;bottom:-24px;width:430px;display:block" />
+        <img src="./assets/cloud-user-2-flat.svg" alt="" style="position:absolute;right:-60px;bottom:-46px;width:400px;display:block;transform:scaleX(-1);animation:bobFlip 13s ease-in-out infinite" />
+        <img src="./assets/cloud-user-3-flat.svg" alt="" style="position:absolute;left:672px;top:18px;width:250px;display:block;opacity:.9;animation:bob 10s ease-in-out infinite" />
+
+        <div style="position:absolute;left:78px;top:0;bottom:0;width:700px;display:flex;flex-direction:column;justify-content:center">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+            <img src="./assets/finout-logo.svg" alt="Finout" style="height:30px;width:auto;display:block" />
+            <span style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:30px;background:rgba(255,255,255,.94);border:2px solid #1B1F1D;font-family:Poppins,sans-serif;font-size:12.5px;font-weight:600">
+              <span style="display:block;width:14px;height:14px;background:#1F8F70;mask:url(./assets/spark.svg) center/contain no-repeat;-webkit-mask:url(./assets/spark.svg) center/contain no-repeat"></span>
+              AI FinOps platform for any scale
+            </span>
+          </div>
+          <div style="font-family:'PP Mondwest',Poppins,sans-serif;font-size:82px;font-weight:400;line-height:.94;letter-spacing:.005em;word-spacing:.2em;text-transform:uppercase">
+            The AI era<br />
+            <span style="position:relative;white-space:nowrap">
+              <span style="position:relative;z-index:2;word-spacing:.2em">costs more</span>
+              <span style="position:absolute;left:-1.5%;right:-1.5%;bottom:.11em;height:.2em;background:#FFD632;border-radius:4px;z-index:1"></span>
+            </span>
+          </div>
+          <div style="display:flex;align-items:center;gap:18px;margin-top:14px">
+            <span style="position:relative;display:inline-flex;flex:none;overflow:hidden;padding:13px 24px;border-radius:12px;background:#38B28E;border:2px solid #1B1F1D;color:#1B1F1D;font-family:Poppins,sans-serif;font-size:15px;font-weight:600;box-shadow:0 5px 0 -1px #1B1F1D">
+              Let's talk
+              <span style="position:absolute;left:0;right:0;bottom:0;height:5px;display:flex;z-index:3">
+                <span style="flex:1;background:#1B1F1D"></span>
+                <span style="flex:1;background:#8B7BF0"></span>
+                <span style="flex:1;background:#4BA2FF"></span>
+                <span style="flex:1;background:#FFD632"></span>
+              </span>
+              <span style="position:absolute;top:-30%;bottom:-30%;left:0;width:44px;background:rgba(255,255,255,.9);animation:swipeA 8s cubic-bezier(.45,.05,.3,1) infinite"></span>
+            </span>
+            <span style="font-family:Poppins,sans-serif;font-size:16px;font-weight:500;line-height:1.4;color:#2B3833;max-width:340px">Every cloud, Kubernetes and AI bill on one map &mdash; so you know where the spend went, and what to do next.</span>
+          </div>
+        </div>
+
+        <div style="position:absolute;right:44px;top:44px;width:296px;border-radius:20px;background:#FFFFFF;border:2px solid #1B1F1D;box-shadow:0 8px 0 -2px #1B1F1D;padding:15px 17px 17px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <span style="display:inline-flex;flex:none;width:28px;height:28px;border-radius:9px;background:#A8E6D0;border:2px solid #1B1F1D;align-items:center;justify-content:center">
+              <span style="display:block;width:14px;height:14px;background:#1B1F1D;mask:url(./assets/spark.svg) center/contain no-repeat;-webkit-mask:url(./assets/spark.svg) center/contain no-repeat;animation:twinkle 3s ease-in-out infinite"></span>
+            </span>
+            <span style="font-family:Poppins,sans-serif;font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#8A938E">Stop 01 on the road</span>
+          </div>
+          <div style="font-family:Poppins,sans-serif;font-size:20px;font-weight:600;line-height:1.16;letter-spacing:-.028em;margin-top:11px;text-wrap:balance">Who is burning my Claude budget<span style="display:inline-block;transform:rotate(11deg) translateY(1px)">?</span></div>
+          <div style="display:flex;align-items:center;gap:9px;margin-top:14px">
+            <span style="padding:8px 15px;border-radius:10px;background:#38B28E;border:2px solid #1B1F1D;font-family:Poppins,sans-serif;font-size:12.5px;font-weight:600">Ask Finout</span>
+            <span style="font-size:11.5px;color:#8A938E">answers in 4s</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:24px">
+      <div style="border-radius:16px;background:#FFFFFF;border:2px solid #1B1F1D;padding:18px 20px">
+        <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#1F8F70;margin-bottom:9px">Same world, 4:1 crop</div>
+        <div style="font-size:13.5px;line-height:1.6;color:#4A5551;text-wrap:pretty">The brick road, the sun disc, the ink-outlined cloud bank and the faint 104px grid are the homepage's own layers, re-staged for the feed. The road still recedes to a vanishing point, so the banner reads as a frame of the scroll rather than a poster about it.</div>
+      </div>
+      <div style="border-radius:16px;background:#FFF9E2;border:2px solid #1B1F1D;padding:18px 20px">
+        <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#8A6B00;margin-bottom:9px">Two carried devices</div>
+        <div style="font-size:13.5px;line-height:1.6;color:#4A5551;text-wrap:pretty">The pixel display face and the marker highlight. Both survive thumbnail size, so a muted feed scroll still lands as Finout before a word is read.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;margin:64px 0 14px;flex-wrap:wrap">
+      <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;color:#C4501F">02</div>
+      <div style="font-family:Poppins,sans-serif;font-size:17px;font-weight:600;letter-spacing:-.02em">The payoff &mdash; campaign banner</div>
+      <div style="margin-left:auto;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;color:#7B8580">1584 &times; 396</div>
+    </div>
+
+    <div style="position:relative;width:100%;height:{{ frameH }};overflow:hidden;border-radius:10px;border:2.5px solid #1B1F1D;box-shadow:0 22px 44px -30px rgba(27,31,29,.5)">
+      <div style="position:absolute;left:0;top:0;width:1584px;height:396px;transform:scale({{ scale }});transform-origin:top left;overflow:hidden;background:#FDF5E2">
+
+        <div style="position:absolute;inset:-2px;background-image:linear-gradient(to right,rgba(27,31,29,.08) 1px,transparent 1px),linear-gradient(to bottom,rgba(27,31,29,.08) 1px,transparent 1px);background-size:104px 104px"></div>
+
+        <img src="./assets/cloud-two-v4.svg" alt="" style="position:absolute;left:-70px;bottom:-52px;width:420px;display:block;opacity:.85" />
+        <img src="./assets/cloud-user-3-flat.svg" alt="" style="position:absolute;left:250px;top:-30px;width:280px;display:block;opacity:.7;animation:bob 12s ease-in-out infinite" />
+
+        <div style="position:absolute;left:78px;top:0;bottom:0;width:790px;display:flex;flex-direction:column;justify-content:center">
+          <div style="display:flex;align-items:center;gap:13px;margin-bottom:22px">
+            <img src="./assets/finout-logo.svg" alt="Finout" style="height:28px;width:auto;display:block;filter:brightness(0) saturate(100%)" />
+            <span style="padding:5px 13px;border-radius:20px;background:#FFD632;border:2px solid #1B1F1D;font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase">One scroll of the road</span>
+          </div>
+          <div style="font-family:'PP Mondwest',Poppins,sans-serif;font-size:74px;font-weight:400;line-height:.96;letter-spacing:.005em;word-spacing:.2em;text-transform:uppercase">
+            Three questions in.<br />
+            <span style="position:relative;white-space:nowrap">
+              <span style="position:relative;z-index:2;word-spacing:.2em">$878K recovered.</span>
+              <span style="position:absolute;left:-1.5%;right:-1.5%;bottom:.1em;height:.2em;background:#A8E6D0;border-radius:4px;z-index:1"></span>
+            </span>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;margin-top:26px">
+            <span style="padding:12px 22px;border-radius:12px;background:#38B28E;border:2px solid #1B1F1D;color:#1B1F1D;font-family:Poppins,sans-serif;font-size:14.5px;font-weight:600;box-shadow:0 5px 0 -1px #1B1F1D">Book a demo</span>
+            <span style="font-family:Poppins,sans-serif;font-size:15px;font-weight:500;color:#3A4A44">Ask a question. Walk to the answer.</span>
+          </div>
+        </div>
+
+        <div style="position:absolute;right:-72px;top:52px;width:520px;border-radius:16px 16px 0 0;overflow:hidden;border:2.5px solid #1B1F1D;border-bottom:none;box-shadow:0 14px 0 -4px #A8E6D0;transform:rotate(-2.4deg)">
+          <img src="./assets/product-dashboard.png" alt="" style="display:block;width:100%;height:auto" />
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:24px">
+      <div style="border-radius:16px;background:#FFFFFF;border:2px solid #1B1F1D;padding:18px 20px">
+        <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#1F8F70;margin-bottom:9px">The end of the scroll</div>
+        <div style="font-size:13.5px;line-height:1.6;color:#4A5551;text-wrap:pretty">Banner 02 is the homepage's closing frame: the cream sky the road lands in, the mint highlight, the real product view.</div>
+      </div>
+      <div style="border-radius:16px;background:#E9F6EF;border:2px solid #1B1F1D;padding:18px 20px">
+        <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#0E6E5C;margin-bottom:9px">Note</div>
+        <div style="font-size:13.5px;line-height:1.6;color:#4A5551;text-wrap:pretty">The shipped campaign assets live at the bottom of the homepage itself &mdash; see <a href="./Finout Sky Road Lego.dc.html">Taking it to LinkedIn</a>. This page is a scratch sheet for the 4:1 cover crop.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { w: 1116 };
+  componentDidMount() {
+    this.measure();
+    this.ro = new ResizeObserver(() => this.measure());
+    if (this.host) this.ro.observe(this.host);
+    window.addEventListener('resize', this.measure);
+  }
+  componentWillUnmount() {
+    if (this.ro) this.ro.disconnect();
+    window.removeEventListener('resize', this.measure);
+  }
+  measure = () => {
+    const w = this.host ? this.host.clientWidth : 1116;
+    if (w && w !== this.state.w) this.setState({ w });
+  };
+  renderVals() {
+    const w = this.state.w || 1116;
+    const scale = Math.min(1, w / 1584);
+    return {
+      hostRef: (el) => { this.host = el; if (el) this.measure(); },
+      scale,
+      frameH: Math.round(396 * scale) + 'px'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

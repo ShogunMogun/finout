@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#BFDCF7}
+  body{font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:#1B1F1D}
+  a{color:#1F8F70;text-decoration:none}
+  a:hover{color:#38B28E}
+  ::selection{background:#FFD632;color:#1B1F1D}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+  @keyframes bobSlow{0%,100%{transform:translateY(0)}50%{transform:translateY(-24px)}}
+  @keyframes driftX{0%,100%{transform:translateX(0)}50%{transform:translateX(42px)}}
+  @keyframes driftXFar{0%,100%{transform:translateX(0)}50%{transform:translateX(84px)}}
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  @keyframes pulseRing{0%{transform:scale(.6);opacity:.6}100%{transform:scale(2.4);opacity:0}}
+  @keyframes twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.32) rotate(22deg)}}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes popPanel{0%{transform:scale(.9) translateY(24px);opacity:0}70%{transform:scale(1.012) translateY(0)}100%{transform:scale(1) translateY(0);opacity:1}}
+  @keyframes popIn{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.07)}100%{transform:scale(1);opacity:1}}
+  @keyframes glowPulse{0%,100%{opacity:.35}50%{opacity:1}}
+  @keyframes nudge{0%,100%{transform:translateY(0);opacity:.75}50%{transform:translateY(7px);opacity:1}}
+  @keyframes shine{0%{transform:translateY(120%)}100%{transform:translateY(-320%)}}
+</style>
+</helmet>
+
+<div style="position:relative;width:100%;height:640vh;background:linear-gradient(180deg,#B4D6F6 0%,#CFE6FB 22%,#E4F1FD 48%,#F1F9FE 68%,#FDF6E4 88%,#F6F1E2 100%)">
+
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden">
+
+    <div id="sp-stage" style="position:absolute;inset:0;perspective:1350px;perspective-origin:50% 48%;overflow:hidden">
+      <div id="sp-world" style="position:absolute;inset:0;transform-style:preserve-3d;will-change:transform">
+
+        <div style="position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;pointer-events:none">
+          <div style="position:absolute;left:-208px;top:-9px;width:416px;height:18px;background:#C9A97A;border:2px solid #1B1F1D;border-radius:0 0 4px 4px;transform:translate3d({{ roadStart.x }},300px,{{ roadStart.z }}) rotateY({{ roadStart.yaw }})"></div>
+
+          <sc-for list="{{ strips1 }}" as="s" hint-placeholder-count="5">
+            <div style="position:absolute;left:0;top:0;width:0;height:0;transform:translate3d({{ s.x }},300px,{{ s.z }}) rotateY({{ s.yaw }}) rotateX(90deg);transform-style:preserve-3d;opacity:{{ s.op }}">
+              <div style="position:absolute;left:-224px;top:-95px;width:448px;height:190px;background:rgba(27,31,29,.16);filter:blur(11px);transform:translateZ(38px)"></div>
+              <div style="position:absolute;left:-208px;top:-95px;width:416px;height:190px;background:#C9A97A;border-left:2px solid #1B1F1D;border-right:2px solid #1B1F1D;transform:translateZ(15px)"></div>
+              <div style="position:absolute;left:-200px;top:-95px;width:400px;height:190px;background-image:url('./assets/road-1.svg');background-size:100% 100%"></div>
+            </div>
+          </sc-for>
+          <sc-for list="{{ strips2 }}" as="s" hint-placeholder-count="5">
+            <div style="position:absolute;left:0;top:0;width:0;height:0;transform:translate3d({{ s.x }},300px,{{ s.z }}) rotateY({{ s.yaw }}) rotateX(90deg);transform-style:preserve-3d;opacity:{{ s.op }}">
+              <div style="position:absolute;left:-224px;top:-95px;width:448px;height:190px;background:rgba(27,31,29,.16);filter:blur(11px);transform:translateZ(38px)"></div>
+              <div style="position:absolute;left:-208px;top:-95px;width:416px;height:190px;background:#C9A97A;border-left:2px solid #1B1F1D;border-right:2px solid #1B1F1D;transform:translateZ(15px)"></div>
+              <div style="position:absolute;left:-200px;top:-95px;width:400px;height:190px;background-image:url('./assets/road-2.svg');background-size:100% 100%"></div>
+            </div>
+          </sc-for>
+          <sc-for list="{{ strips3 }}" as="s" hint-placeholder-count="5">
+            <div style="position:absolute;left:0;top:0;width:0;height:0;transform:translate3d({{ s.x }},300px,{{ s.z }}) rotateY({{ s.yaw }}) rotateX(90deg);transform-style:preserve-3d;opacity:{{ s.op }}">
+              <div style="position:absolute;left:-224px;top:-95px;width:448px;height:190px;background:rgba(27,31,29,.16);filter:blur(11px);transform:translateZ(38px)"></div>
+              <div style="position:absolute;left:-208px;top:-95px;width:416px;height:190px;background:#C9A97A;border-left:2px solid #1B1F1D;border-right:2px solid #1B1F1D;transform:translateZ(15px)"></div>
+              <div style="position:absolute;left:-200px;top:-95px;width:400px;height:190px;background-image:url('./assets/road-3.svg');background-size:100% 100%"></div>
+            </div>
+          </sc-for>
+          <sc-for list="{{ strips4 }}" as="s" hint-placeholder-count="5">
+            <div style="position:absolute;left:0;top:0;width:0;height:0;transform:translate3d({{ s.x }},300px,{{ s.z }}) rotateY({{ s.yaw }}) rotateX(90deg);transform-style:preserve-3d;opacity:{{ s.op }}">
+              <div style="position:absolute;left:-224px;top:-95px;width:448px;height:190px;background:rgba(27,31,29,.16);filter:blur(11px);transform:translateZ(38px)"></div>
+              <div style="position:absolute;left:-208px;top:-95px;width:416px;height:190px;background:#C9A97A;border-left:2px solid #1B1F1D;border-right:2px solid #1B1F1D;transform:translateZ(15px)"></div>
+              <div style="position:absolute;left:-200px;top:-95px;width:400px;height:190px;background-image:url('./assets/road-4.svg');background-size:100% 100%"></div>
+            </div>
+          </sc-for>
+          <sc-for list="{{ strips5 }}" as="s" hint-placeholder-count="5">
+            <div style="position:absolute;left:0;top:0;width:0;height:0;transform:translate3d({{ s.x }},300px,{{ s.z }}) rotateY({{ s.yaw }}) rotateX(90deg);transform-style:preserve-3d;opacity:{{ s.op }}">
+              <div style="position:absolute;left:-224px;top:-95px;width:448px;height:190px;background:rgba(27,31,29,.16);filter:blur(11px);transform:translateZ(38px)"></div>
+              <div style="position:absolute;left:-208px;top:-95px;width:416px;height:190px;background:#C9A97A;border-left:2px solid #1B1F1D;border-right:2px solid #1B1F1D;transform:translateZ(15px)"></div>
+              <div style="position:absolute;left:-200px;top:-95px;width:400px;height:190px;background-image:url('./assets/road-5.svg');background-size:100% 100%"></div>
+            </div>
+          </sc-for>
+          <sc-for list="{{ strips6 }}" as="s" hint-placeholder-count="5">
+            <div style="position:absolute;left:0;top:0;width:0;height:0;transform:translate3d({{ s.x }},300px,{{ s.z }}) rotateY({{ s.yaw }}) rotateX(90deg);transform-style:preserve-3d;opacity:{{ s.op }}">
+              <div style="position:absolute;left:-224px;top:-95px;width:448px;height:190px;background:rgba(27,31,29,.16);filter:blur(11px);transform:translateZ(38px)"></div>
+              <div style="position:absolute;left:-208px;top:-95px;width:416px;height:190px;background:#C9A97A;border-left:2px solid #1B1F1D;border-right:2px solid #1B1F1D;transform:translateZ(15px)"></div>
+              <div style="position:absolute;left:-200px;top:-95px;width:400px;height:190px;background-image:url('./assets/road-6.svg');background-size:100% 100%"></div>
+            </div>
+          </sc-for>
+        </div>
+
+        <sc-for list="{{ cloudsA }}" as="c" hint-placeholder-count="5">
+          <div style="position:absolute;left:{{ c.left }};top:{{ c.top }};transform:translateZ({{ c.z }});filter:blur({{ c.blur }});opacity:{{ c.op }};pointer-events:none">
+            <img src="./assets/cloud-a.svg" alt="" style="width:{{ c.w }};display:block;transform:scaleX({{ c.flip }});animation:{{ c.anim }}" />
+          </div>
+        </sc-for>
+        <sc-for list="{{ cloudsB }}" as="c" hint-placeholder-count="5">
+          <div style="position:absolute;left:{{ c.left }};top:{{ c.top }};transform:translateZ({{ c.z }});filter:blur({{ c.blur }});opacity:{{ c.op }};pointer-events:none">
+            <img src="./assets/cloud-b.svg" alt="" style="width:{{ c.w }};display:block;transform:scaleX({{ c.flip }});animation:{{ c.anim }}" />
+          </div>
+        </sc-for>
+        <sc-for list="{{ cloudsC }}" as="c" hint-placeholder-count="5">
+          <div style="position:absolute;left:{{ c.left }};top:{{ c.top }};transform:translateZ({{ c.z }});filter:blur({{ c.blur }});opacity:{{ c.op }};pointer-events:none">
+            <img src="./assets/cloud-c.svg" alt="" style="width:{{ c.w }};display:block;transform:scaleX({{ c.flip }});animation:{{ c.anim }}" />
+          </div>
+        </sc-for>
+        <sc-for list="{{ cloudsD }}" as="c" hint-placeholder-count="4">
+          <div style="position:absolute;left:{{ c.left }};top:{{ c.top }};transform:translateZ({{ c.z }});filter:blur({{ c.blur }});opacity:{{ c.op }};pointer-events:none">
+            <img src="./assets/cloud-d.svg" alt="" style="width:{{ c.w }};display:block;transform:scaleX({{ c.flip }});animation:{{ c.anim }}" />
+          </div>
+        </sc-for>
+        <sc-for list="{{ cloudsE }}" as="c" hint-placeholder-count="5">
+          <div style="position:absolute;left:{{ c.left }};top:{{ c.top }};transform:translateZ({{ c.z }});filter:blur({{ c.blur }});opacity:{{ c.op }};pointer-events:none">
+            <img src="./assets/cloud-e.svg" alt="" style="width:{{ c.w }};display:block;transform:scaleX({{ c.flip }});animation:{{ c.anim }}" />
+          </div>
+        </sc-for>
+
+        <sc-for list="{{ sparkles }}" as="s" hint-placeholder-count="5">
+          <div style="position:absolute;left:{{ s.left }};top:{{ s.top }};transform:translateZ({{ s.z }});opacity:{{ s.op }};pointer-events:none">
+            <img src="./assets/sparkle.svg" alt="" style="width:{{ s.w }};display:block;animation:twinkle {{ s.dur }} ease-in-out infinite" />
+          </div>
+        </sc-for>
+
+        <div style="position:absolute;left:-28%;top:44%;transform:translateZ(-1150px);pointer-events:none">
+          <div style="position:relative;width:210px;height:270px;animation:bobSlow 10s ease-in-out infinite">
+            <img src="https://www.finout.io/hubfs/windmill_stand.png" alt="" style="position:absolute;left:50%;bottom:0;height:214px;width:auto;margin-left:-17px;display:block" />
+            <img src="https://www.finout.io/hubfs/windmill_body.png" alt="" style="position:absolute;left:50%;top:0;width:164px;margin-left:-82px;display:block;animation:spin {{ spinDur }} linear infinite" />
+          </div>
+        </div>
+
+        <div style="position:absolute;right:-52%;top:38%;transform:translateZ(-2400px);pointer-events:none;opacity:.9">
+          <div style="position:relative;width:250px;height:230px;animation:bob 9s ease-in-out infinite">
+            <img src="https://www.finout.io/hubfs/telescope_stand.png" alt="" style="position:absolute;left:44%;bottom:0;height:142px;width:auto;margin-left:-56px;display:block" />
+            <img src="https://www.finout.io/hubfs/telescope_body.png" alt="" style="position:absolute;left:8px;top:10px;width:224px;display:block;transform-origin:76% 62%;transform:rotate({{ scopeAngle }});transition:transform 1.7s cubic-bezier(.5,0,.2,1)" />
+          </div>
+        </div>
+
+        <div style="position:absolute;left:-70%;top:58%;transform:translateZ(-3700px);pointer-events:none;opacity:.85">
+          <div style="position:relative;width:120px;height:150px;animation:bobSlow 13s ease-in-out infinite">
+            <img src="https://www.finout.io/hubfs/windmill_stand.png" alt="" style="position:absolute;left:50%;bottom:0;height:118px;width:auto;margin-left:-10px;display:block" />
+            <img src="https://www.finout.io/hubfs/windmill_body.png" alt="" style="position:absolute;left:50%;top:0;width:92px;margin-left:-46px;display:block;animation:spin {{ spinDurFar }} linear infinite" />
+          </div>
+        </div>
+
+        <sc-for list="{{ stations }}" as="s" hint-placeholder-count="3">
+          <div style="position:absolute;left:{{ s.left }};top:{{ s.top }};transform:translateZ({{ s.z }});transform-style:preserve-3d;opacity:{{ s.opacity }};transition:opacity .7s ease;pointer-events:{{ s.pointer }}">
+            <div style="position:relative;animation:bob 8s ease-in-out infinite">
+              <img src="./assets/cloud-e.svg" alt="" style="position:absolute;left:50%;top:-72px;width:440px;margin-left:-220px;display:block;opacity:.96;pointer-events:none" />
+              <div onClick="{{ s.open }}" style="position:relative;width:390px;cursor:pointer;border-radius:22px;background:#FFFFFF;border:2.5px solid #1B1F1D;box-shadow:0 12px 0 -3px {{ s.shadow }},0 34px 60px -30px rgba(27,31,29,.4);padding:20px 22px;transition:transform .3s cubic-bezier(.3,1.3,.5,1)" style-hover="transform:translateY(-6px)">
+                <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+                  <span style="display:inline-flex;flex:none;width:30px;height:30px;border-radius:10px;background:{{ s.shadow }};border:2px solid #1B1F1D;align-items:center;justify-content:center">
+                    <span style="display:inline-block;width:14px;height:14px;background:#1B1F1D;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);animation:twinkle 3s ease-in-out infinite"></span>
+                  </span>
+                  <span style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#8A938E">{{ s.kicker }}</span>
+                  <span style="margin-left:auto;font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;color:#1F8F70">0{{ s.n }}</span>
+                </div>
+                <div style="font-family:Poppins,sans-serif;font-size:25px;font-weight:600;line-height:1.16;letter-spacing:-.03em;text-wrap:balance">{{ s.q }}</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-top:16px">
+                  <span style="padding:9px 16px;border-radius:11px;background:#38B28E;border:2px solid #1B1F1D;color:#FFFFFF;font-family:Poppins,sans-serif;font-size:13px;font-weight:600">Ask Billy</span>
+                  <span style="font-size:12.5px;color:#8A938E">{{ s.hint }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+
+      </div>
+
+      <div id="sp-hero" style="position:absolute;left:0;right:0;top:0;bottom:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;padding:0 28px;will-change:opacity,transform">
+        <div style="display:inline-flex;align-items:center;gap:9px;padding:6px 15px 6px 9px;border-radius:30px;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border:2px solid #1B1F1D;font-family:Poppins,sans-serif;font-size:12.5px;font-weight:600">
+          <span style="position:relative;display:inline-flex;width:16px;height:16px;align-items:center;justify-content:center">
+            <span style="position:absolute;inset:0;border-radius:50%;background:rgba(56,178,142,.45);animation:pulseRing 2.4s ease-out infinite"></span>
+            <span style="width:7px;height:7px;border-radius:50%;background:#38B28E"></span>
+          </span>
+          AI FinOps platform for any scale
+        </div>
+
+        <h1 style="font-family:Poppins,sans-serif;margin:22px 0 0;font-size:{{ h1Size }};line-height:.98;letter-spacing:-.04em;font-weight:600;text-align:center;text-wrap:balance">
+          FinOps for the<br />
+          <span style="position:relative;white-space:nowrap">
+            <span style="position:relative;z-index:2">Agentic Era</span>
+            <span style="position:absolute;left:-2%;right:-2%;bottom:.09em;height:.24em;background:#FFD632;border-radius:4px;z-index:1"></span>
+          </span>
+        </h1>
+
+        <p style="margin:20px auto 0;max-width:580px;font-size:18.5px;line-height:1.5;color:#33403B;text-align:center;text-wrap:pretty">
+          Real-time visibility into every cloud, Kubernetes and AI bill &mdash; allocated to the team that spent it.
+        </p>
+
+        <div style="display:flex;align-items:center;gap:12px;margin-top:26px;pointer-events:auto">
+          <span style="padding:13px 22px;border-radius:12px;background:#38B28E;border:2px solid #1B1F1D;color:#FFFFFF;font-family:Poppins,sans-serif;font-size:14.5px;font-weight:600;box-shadow:0 5px 0 -1px #1B1F1D">Book a demo</span>
+          <span style="padding:13px 22px;border-radius:12px;background:#FFFFFF;border:2px solid #1B1F1D;color:#1B1F1D;font-family:Poppins,sans-serif;font-size:14.5px;font-weight:600">Start free trial</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:7px;margin-top:44px;font-family:Poppins,sans-serif;font-size:12px;font-weight:500;color:#4E5750;animation:nudge 2.2s ease-in-out infinite">
+          <span>Scroll to walk the path</span>
+          <span style="display:inline-block;width:20px;height:20px;border-right:2.5px solid #1B1F1D;border-bottom:2.5px solid #1B1F1D;transform:rotate(45deg)"></span>
+        </div>
+      </div>
+
+      <div id="sp-outro" style="position:absolute;left:0;right:0;top:0;bottom:0;z-index:42;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 28px;opacity:0;pointer-events:none;will-change:opacity">
+        <div style="max-width:620px;text-align:center">
+          <div style="font-family:Poppins,sans-serif;font-size:{{ outroSize }};font-weight:600;letter-spacing:-.035em;line-height:1.04;text-wrap:balance">
+            Three questions in.<br />
+            <span style="position:relative;white-space:nowrap"><span style="position:relative;z-index:2">$878K recovered.</span><span style="position:absolute;left:-2%;right:-2%;bottom:.08em;height:.22em;background:#A8E6D0;border-radius:4px;z-index:1"></span></span>
+          </div>
+          <p style="margin:18px auto 0;max-width:470px;font-size:17px;line-height:1.5;color:#33403B;text-wrap:pretty">That was a demo bill. Yours takes five minutes to connect and the agents start walking it on their own.</p>
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:26px">
+            <span style="padding:14px 24px;border-radius:12px;background:#38B28E;border:2px solid #1B1F1D;color:#FFFFFF;font-family:Poppins,sans-serif;font-size:15px;font-weight:600;box-shadow:0 5px 0 -1px #1B1F1D">Book a demo</span>
+            <span style="padding:14px 24px;border-radius:12px;background:#FFFFFF;border:2px solid #1B1F1D;color:#1B1F1D;font-family:Poppins,sans-serif;font-size:15px;font-weight:600">Connect your bill</span>
+          </div>
+        </div>
+      </div>
+
+      <sc-if value="{{ isOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:{{ overlayPad }};background:rgba(214,232,248,.62);backdrop-filter:blur(9px)">
+          <div onClick="{{ close }}" style="position:absolute;inset:0"></div>
+          <div style="position:relative;width:100%;max-width:{{ panelMax }};max-height:92vh;overflow:hidden;border-radius:24px;background:#FFFFFF;border:2.5px solid #1B1F1D;box-shadow:0 14px 0 -3px {{ panel.accent }},0 50px 90px -40px rgba(27,31,29,.55);animation:popPanel .5s cubic-bezier(.25,1.15,.4,1) both">
+
+            <div style="display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:2px solid #1B1F1D;background:{{ panel.tint }};flex-wrap:wrap">
+              <span style="display:inline-flex;flex:none;width:30px;height:30px;border-radius:10px;background:#FFFFFF;border:2px solid #1B1F1D;align-items:center;justify-content:center">
+                <span style="display:inline-block;width:14px;height:14px;background:#1B1F1D;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)"></span>
+              </span>
+              <div style="min-width:0">
+                <div style="font-family:Poppins,sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5D6A64">You asked</div>
+                <div style="font-family:Poppins,sans-serif;font-size:17px;font-weight:600;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ panel.q }}</div>
+              </div>
+              <div style="margin-left:auto;display:flex;align-items:center;gap:9px">
+                <span style="display:flex;align-items:center;gap:6px;padding:6px 11px;border-radius:20px;background:#FFFFFF;border:2px solid #1B1F1D;font-family:Poppins,sans-serif;font-size:11px;font-weight:600">
+                  <span style="width:7px;height:7px;border-radius:50%;background:#38B28E;animation:glowPulse 1.8s ease-in-out infinite"></span>{{ panel.view }}
+                </span>
+                <div onClick="{{ close }}" style="cursor:pointer;width:32px;height:32px;border-radius:50%;background:#FFFFFF;border:2px solid #1B1F1D;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1;font-weight:600">&times;</div>
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:{{ panelCols }};gap:0;max-height:calc(92vh - 66px);overflow:auto">
+
+              <div style="padding:20px;border-right:{{ panelDivider }}">
+                <div style="display:flex;gap:22px;flex-wrap:wrap;margin-bottom:16px">
+                  <sc-for list="{{ panel.stats }}" as="s" hint-placeholder-count="3">
+                    <div>
+                      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8A938E">{{ s.label }}</div>
+                      <div style="font-family:Poppins,sans-serif;font-size:26px;font-weight:600;letter-spacing:-.03em;margin-top:2px;color:{{ s.color }};font-variant-numeric:tabular-nums">{{ s.value }}</div>
+                    </div>
+                  </sc-for>
+                  <div style="margin-left:auto;display:flex;align-items:flex-end;gap:11px;padding-bottom:5px">
+                    <sc-for list="{{ panel.legend }}" as="l" hint-placeholder-count="3">
+                      <div style="display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:500;color:#6A746F">
+                        <span style="width:10px;height:10px;border-radius:3px;background:{{ l.color }};border:1.5px solid #1B1F1D"></span>{{ l.name }}
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+
+                <div style="position:relative;height:{{ chartH }};display:flex;align-items:flex-end;gap:3px;padding-bottom:2px;border-bottom:2px solid #1B1F1D">
+                  <sc-for list="{{ panel.bars }}" as="b" hint-placeholder-count="30">
+                    <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;gap:2px">
+                      <div style="height:{{ b.h3 }};background:#F78251;border-radius:4px 4px 0 0;border:1.5px solid #1B1F1D;border-bottom:none;transition:height .85s cubic-bezier(.2,.8,.2,1);transition-delay:{{ b.d }}"></div>
+                      <div style="height:{{ b.h2 }};background:#FFD632;border-left:1.5px solid #1B1F1D;border-right:1.5px solid #1B1F1D;transition:height .85s cubic-bezier(.2,.8,.2,1);transition-delay:{{ b.d }}"></div>
+                      <div style="height:{{ b.h1 }};background:#38B28E;border-left:1.5px solid #1B1F1D;border-right:1.5px solid #1B1F1D;transition:height .85s cubic-bezier(.2,.8,.2,1);transition-delay:{{ b.d }}"></div>
+                    </div>
+                  </sc-for>
+                  <sc-if value="{{ panel.showFlag }}" hint-placeholder-val="{{ false }}">
+                    <div style="position:absolute;right:2%;top:-4px;padding:6px 12px;border-radius:20px;background:#FFD632;border:2px solid #1B1F1D;font-family:Poppins,sans-serif;font-size:11.5px;font-weight:600;white-space:nowrap;animation:popIn .5s cubic-bezier(.3,1.4,.5,1) .5s both">{{ panel.flag }}</div>
+                  </sc-if>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:8px 0 0;font-size:10px;font-weight:500;color:#9BA49F">
+                  <sc-for list="{{ panel.axis }}" as="a" hint-placeholder-count="5">
+                    <span>{{ a }}</span>
+                  </sc-for>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1.7fr .8fr .7fr .9fr;padding:16px 0 8px;font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#8A938E">
+                  <div>{{ panel.tableHead }}</div><div style="text-align:right">Total</div><div style="text-align:right">vs prev</div><div style="text-align:right">Share</div>
+                </div>
+                <sc-for list="{{ panel.rows }}" as="r" hint-placeholder-count="5">
+                  <div style="display:grid;grid-template-columns:1.7fr .8fr .7fr .9fr;align-items:center;padding:10px 0;border-top:1.5px solid #EEF2F0;animation:rise .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:{{ r.d }}">
+                    <div style="display:flex;align-items:center;gap:9px;min-width:0">
+                      <span style="flex:none;width:11px;height:11px;border-radius:3px;background:{{ r.color }};border:1.5px solid #1B1F1D"></span>
+                      <span style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</span>
+                      <span style="flex:none;padding:2px 7px;border-radius:6px;background:#E4F5EE;border:1.5px solid #A9DECB;font-size:9.5px;font-weight:600;color:#1F8F70">{{ r.tag }}</span>
+                    </div>
+                    <div style="text-align:right;font-size:13px;font-weight:500;font-variant-numeric:tabular-nums">{{ r.total }}</div>
+                    <div style="text-align:right;font-size:12px;font-weight:700;color:{{ r.deltaColor }};font-variant-numeric:tabular-nums">{{ r.delta }}</div>
+                    <div style="display:flex;align-items:center;gap:7px;justify-content:flex-end">
+                      <span style="width:56px;height:9px;border-radius:5px;background:#F2F5F3;border:1.5px solid #1B1F1D;overflow:hidden;flex:none">
+                        <span style="display:block;height:100%;width:{{ r.share }};background:{{ r.color }}"></span>
+                      </span>
+                      <span style="font-size:11.5px;color:#6A746F;font-variant-numeric:tabular-nums;min-width:34px;text-align:right">{{ r.share }}</span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+
+              <div style="padding:20px;background:#FBFCFB;display:flex;flex-direction:column;gap:14px">
+                <div style="border-radius:16px;background:#FFF9E2;border:2px solid #1B1F1D;box-shadow:0 7px 0 -2px #FFD632;padding:16px">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+                    <span style="display:inline-block;width:13px;height:13px;background:#1B1F1D;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)"></span>
+                    <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#8A6B00">Billy's answer</div>
+                  </div>
+                  <div style="font-family:Poppins,sans-serif;font-size:16px;font-weight:600;line-height:1.32;text-wrap:pretty">{{ panel.head }}</div>
+                  <div style="font-size:13px;line-height:1.55;color:#5D6259;margin-top:8px;text-wrap:pretty">{{ panel.body }}</div>
+                </div>
+
+                <div>
+                  <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#8A938E;margin-bottom:9px">{{ panel.driversTitle }}</div>
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <sc-for list="{{ panel.drivers }}" as="d" hint-placeholder-count="3">
+                      <div style="display:flex;align-items:center;gap:9px;padding:10px 11px;border-radius:11px;background:#FFFFFF;border:1.5px solid #E4E9E6;animation:rise .45s cubic-bezier(.2,.8,.2,1) both;animation-delay:{{ d.d }}">
+                        <span style="flex:none;width:10px;height:10px;border-radius:3px;background:{{ d.color }};border:1.5px solid #1B1F1D"></span>
+                        <span style="flex:1;font-size:12.5px;font-weight:500;color:#2E3A35">{{ d.label }}</span>
+                        <span style="font-size:12.5px;font-weight:700;color:{{ d.textColor }};font-variant-numeric:tabular-nums">{{ d.value }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+
+                <div style="border-radius:16px;background:#FFFFFF;border:2px solid #1B1F1D;box-shadow:0 7px 0 -2px #A8E6D0;padding:16px;margin-top:auto">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px">
+                    <div style="font-family:Poppins,sans-serif;font-size:13.5px;font-weight:600">Agent actions</div>
+                    <div style="font-size:10.5px;font-weight:600;color:#8A938E">{{ panel.actionState }}</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <sc-for list="{{ panel.actions }}" as="a" hint-placeholder-count="3">
+                      <div style="display:flex;align-items:center;gap:9px;padding:10px 11px;border-radius:11px;background:{{ a.bg }};border:1.5px solid {{ a.bd }}">
+                        <span style="flex:none;width:18px;height:18px;border-radius:50%;border:2px solid #1B1F1D;background:{{ a.fill }};display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;color:#1B1F1D">{{ a.mark }}</span>
+                        <span style="flex:1;font-size:12.5px;font-weight:500;color:#2E3A35">{{ a.label }}</span>
+                        <span style="font-size:12px;font-weight:700;color:{{ a.valueColor }};font-variant-numeric:tabular-nums">{{ a.value }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:14px;padding-top:13px;border-top:1.5px solid #EEF2F0">
+                    <div>
+                      <div style="font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#8A938E">{{ panel.savingsLabel }}</div>
+                      <div style="font-family:Poppins,sans-serif;font-size:28px;font-weight:600;color:#1F8F70;letter-spacing:-.03em;font-variant-numeric:tabular-nums">{{ panel.savings }}</div>
+                    </div>
+                    <div style="padding:11px 18px;border-radius:11px;background:#38B28E;border:2px solid #1B1F1D;color:#FFFFFF;font-family:Poppins,sans-serif;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap">{{ panel.cta }}</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div style="display:flex;align-items:center;gap:9px;padding:13px 20px;border-top:2px solid #1B1F1D;background:#FFFFFF;flex-wrap:wrap">
+              <span style="font-size:11.5px;font-weight:600;color:#8A938E">Follow up</span>
+              <sc-for list="{{ followUps }}" as="f" hint-placeholder-count="3">
+                <div onClick="{{ f.go }}" style="cursor:pointer;padding:7px 14px;border-radius:20px;background:#FFFFFF;border:1.5px solid #DDE3E0;font-family:Poppins,sans-serif;font-size:12px;font-weight:500;color:#42504A;transition:all .2s" style-hover="border-color:#1B1F1D;transform:translateY(-2px)">{{ f.label }}</div>
+              </sc-for>
+              <div onClick="{{ close }}" style="margin-left:auto;cursor:pointer;font-family:Poppins,sans-serif;font-size:12.5px;font-weight:600;color:#1F8F70">Back to the path &rarr;</div>
+            </div>
+
+          </div>
+        </div>
+      </sc-if>
+    </div>
+
+    <div style="position:absolute;left:0;right:0;top:0;z-index:60;display:flex;align-items:center;flex-wrap:wrap;gap:{{ navGap }};max-width:1420px;margin:0 auto;padding:22px 30px;pointer-events:none">
+      <img src="./assets/finout-logo.svg" alt="Finout" style="height:26px;width:auto;display:block" />
+      <div style="display:{{ navMenuDisplay }};align-items:center;flex-wrap:wrap;gap:12px 24px;font-family:Poppins,sans-serif;font-size:14.5px;font-weight:500;color:#2E3A35">
+        <span style="color:#1F8F70;font-weight:600">AI</span>
+        <span>Platform</span>
+        <span>Integrations</span>
+        <span>Resources</span>
+        <span>Pricing</span>
+      </div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:11px;font-family:Poppins,sans-serif;font-size:13.5px;font-weight:600">
+        <span style="padding:9px 16px;border-radius:9px;background:rgba(255,255,255,.92);border:2px solid #1B1F1D;color:#1B1F1D">Free trial</span>
+        <span style="padding:9px 18px;border-radius:9px;background:#38B28E;border:2px solid #1B1F1D;color:#FFFFFF">Book a demo</span>
+      </div>
+    </div>
+
+    <div style="position:absolute;right:26px;top:50%;z-index:58;transform:translateY(-50%);display:{{ railDisplay }};flex-direction:column;gap:12px">
+      <sc-for list="{{ rail }}" as="r" hint-placeholder-count="3">
+        <div onClick="{{ r.go }}" style="cursor:pointer;display:flex;align-items:center;gap:9px;justify-content:flex-end">
+          <span style="font-family:Poppins,sans-serif;font-size:11.5px;font-weight:600;color:{{ r.fg }};opacity:{{ r.labelOpacity }};transition:all .3s;white-space:nowrap">{{ r.label }}</span>
+          <span style="width:13px;height:13px;border-radius:50%;border:2px solid #1B1F1D;background:{{ r.bg }};transition:background .3s"></span>
+        </div>
+      </sc-for>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lookIntensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:5,&quot;min&quot;:0,&quot;max&quot;:14,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;showRail&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+const TRAVEL = 5400;
+
+const STATIONS = [
+  {
+    n: 1, q: 'Why did our costs spike yesterday?', kicker: 'Anomaly detection',
+    hint: 'Opens MegaBill', z: -1500, left: '9%', top: '31%', side: 'left',
+    shadow: '#FFD632', accent: '#FFD632', tint: '#FFF9E2', view: 'MegaBill · daily',
+    head: 'A retry storm on Support Copilot — not a pricing change.',
+    body: 'Yesterday 14% of Anthropic calls were retries after the 18:40 deploy. Three teams share that endpoint, so the cost never landed on an owner.',
+    stats: [
+      { label: 'Yesterday', value: '$118,402', color: '#1B1F1D' },
+      { label: 'vs 30-day avg', value: '+41.2%', color: '#C4501F' },
+      { label: 'AI spend', value: '$34,180', color: '#D9622F' }
+    ],
+    axis: ['Jun 28', 'Jul 06', 'Jul 13', 'Jul 20', 'Jul 26'],
+    showFlag: true, flag: '▲ Spike · Jul 26', anomaly: true,
+    tableHead: 'Group by · Service',
+    rows: [
+      { name: 'Anthropic · claude-sonnet', tag: 'ai', total: '$28,940', delta: '+164%', up: true, share: '24%', color: '#F78251' },
+      { name: 'EC2 · on-demand burst', tag: 'compute', total: '$21,470', delta: '+38%', up: true, share: '18%', color: '#FFD632' },
+      { name: 'EKS · prod-us-east', tag: 'k8s', total: '$19,260', delta: '+4%', up: true, share: '16%', color: '#A9CEF7' },
+      { name: 'RDS · aurora', tag: 'data', total: '$14,880', delta: '-2%', up: false, share: '13%', color: '#38B28E' },
+      { name: 'Others (38)', tag: 'auto', total: '$33,852', delta: '+1%', up: true, share: '29%', color: '#C9D2CD' }
+    ],
+    driversTitle: 'What drove it',
+    drivers: [
+      { label: 'Retry storm · 14% of calls', value: '+$18.1K', color: '#F78251', textColor: '#C4501F' },
+      { label: 'Spot reclaim → on-demand', value: '+$11.4K', color: '#FFD632', textColor: '#8A6B00' },
+      { label: 'Untagged inference jobs', value: '$6.2K', color: '#E0BDF5', textColor: '#7A4BA0' }
+    ],
+    actionState: '2 applied · 1 armed',
+    actions: [
+      { label: 'Cap retries on Support Copilot', value: '$31K/mo', done: true },
+      { label: 'Rebalance spot capacity pool', value: '$12K/mo', done: true },
+      { label: 'Alert owner at $4K/day', value: 'Armed', done: false }
+    ],
+    savingsLabel: 'Recoverable / mo', savings: '$43K', cta: 'Apply all'
+  },
+  {
+    n: 2, q: 'Which team is costing us the most?', kicker: 'Virtual Tagging™',
+    hint: 'Opens cost allocation', z: -3000, left: '58%', top: '29%', side: 'right',
+    shadow: '#A8E6D0', accent: '#A8E6D0', tint: '#E9F6F1', view: 'Allocation · by team',
+    head: 'Support Engineering — $418K, and 41% of it is brand new.',
+    body: 'Virtual Tags allocate 98% of the bill without a single code change. Support Eng passed Platform for the first time this quarter, entirely on agent inference.',
+    stats: [
+      { label: 'Allocated', value: '98%', color: '#1F8F70' },
+      { label: 'Top team', value: '$418K', color: '#1B1F1D' },
+      { label: 'Untagged left', value: '$49K', color: '#8A938E' }
+    ],
+    axis: ['Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    showFlag: true, flag: 'Support Eng takes #1', anomaly: false,
+    tableHead: 'Group by · V-Tag: Team',
+    rows: [
+      { name: 'Support Engineering', tag: 'team', total: '$418,220', delta: '+41.2%', up: true, share: '17%', color: '#F78251' },
+      { name: 'Platform', tag: 'team', total: '$392,640', delta: '-3.1%', up: false, share: '16%', color: '#38B28E' },
+      { name: 'Data & ML', tag: 'team', total: '$351,900', delta: '+8.4%', up: true, share: '14%', color: '#FFD632' },
+      { name: 'Checkout', tag: 'team', total: '$208,410', delta: '-11.6%', up: false, share: '8%', color: '#A9CEF7' },
+      { name: 'Others (46)', tag: 'auto', total: '$1,110,760', delta: '+2.0%', up: true, share: '45%', color: '#C9D2CD' }
+    ],
+    driversTitle: 'Inside Support Engineering',
+    drivers: [
+      { label: 'Agent inference · shared', value: '$186K', color: '#F78251', textColor: '#C4501F' },
+      { label: 'Ticket search cluster', value: '$142K', color: '#FFD632', textColor: '#8A6B00' },
+      { label: 'Vector store · pinecone', value: '$90K', color: '#E0BDF5', textColor: '#7A4BA0' }
+    ],
+    actionState: '3 written · 0 tickets',
+    actions: [
+      { label: 'Split shared inference by request', value: '3 owners', done: true },
+      { label: 'V-Tag from K8s squad labels', value: '96% claimed', done: true },
+      { label: 'Send owner a weekly digest', value: 'Armed', done: false }
+    ],
+    savingsLabel: 'Now attributable', savings: '$612K', cta: 'Open showback'
+  },
+  {
+    n: 3, q: 'Where can we save money?', kicker: 'CostGuard',
+    hint: 'Opens savings plan', z: -4500, left: '11%', top: '33%', side: 'left',
+    shadow: '#A9CEF7', accent: '#A9CEF7', tint: '#EFF7FE', view: 'CostGuard · plan',
+    head: '$223K a month, ranked by effort — and 61% needs no engineering.',
+    body: 'Idle volumes and unused commitments are one click. The inference commitment is the big one, and it only needs finance to sign, not a sprint.',
+    stats: [
+      { label: 'Recoverable / mo', value: '$223K', color: '#1F8F70' },
+      { label: 'No-code share', value: '61%', color: '#1B1F1D' },
+      { label: 'Payback', value: '9 days', color: '#1B1F1D' }
+    ],
+    axis: ['Now', '+1 mo', '+2 mo', '+3 mo', '+4 mo'],
+    showFlag: true, flag: 'Projected with plan applied', anomaly: false,
+    tableHead: 'Opportunity',
+    rows: [
+      { name: 'Buy inference commitments', tag: 'ai', total: '$96,000', delta: 'finance', up: false, share: '43%', color: '#38B28E' },
+      { name: 'Delete 214 idle EBS volumes', tag: 'storage', total: '$48,200', delta: '1 click', up: false, share: '22%', color: '#A9CEF7' },
+      { name: 'Right-size 61 over-provisioned pods', tag: 'k8s', total: '$37,400', delta: '1 sprint', up: true, share: '17%', color: '#FFD632' },
+      { name: 'Drop unused Datadog hosts', tag: 'saas', total: '$24,900', delta: '1 click', up: false, share: '11%', color: '#E0BDF5' },
+      { name: 'Archive cold S3 to Glacier', tag: 'storage', total: '$16,500', delta: '1 click', up: false, share: '7%', color: '#FBC9DD' }
+    ],
+    driversTitle: 'Biggest levers',
+    drivers: [
+      { label: 'Commitment coverage gap', value: '$96K', color: '#38B28E', textColor: '#1F8F70' },
+      { label: 'Idle & unattached storage', value: '$64.7K', color: '#A9CEF7', textColor: '#2A6BA8' },
+      { label: 'Over-provisioned compute', value: '$37.4K', color: '#FFD632', textColor: '#8A6B00' }
+    ],
+    actionState: '2 applied · 1 waiting',
+    actions: [
+      { label: 'Delete idle EBS volumes', value: '$48K/mo', done: true },
+      { label: 'Drop unused Datadog hosts', value: '$25K/mo', done: true },
+      { label: 'Commitment purchase · needs sign-off', value: '$96K/mo', done: false }
+    ],
+    savingsLabel: 'Applied so far', savings: '$73K', cta: 'Send to finance'
+  }
+];
+
+const CLOUDS = [
+  ['e', '4%', '6%', -5200, 760, 3.5, 0.6, 1, 62],
+  ['c', '44%', '2%', -5000, 700, 3.5, 0.55, -1, 70],
+  ['a', '70%', '10%', -4700, 780, 3, 0.6, 1, 58],
+  ['b', '20%', '16%', -4400, 500, 3, 0.62, -1, 66],
+  ['d', '86%', '4%', -4100, 400, 2.5, 0.66, 1, 54],
+
+  ['a', '-8%', '14%', -3600, 620, 2, 0.76, 1, 44],
+  ['c', '60%', '4%', -3400, 660, 2, 0.7, -1, 50],
+  ['e', '80%', '20%', -3100, 540, 1.8, 0.78, 1, 46],
+  ['b', '-6%', '44%', -2600, 420, 1.5, 0.8, 1, 40],
+  ['c', '74%', '46%', -2400, 520, 1.5, 0.76, -1, 48],
+
+  ['e', '-42%', '20%', -2100, 700, 1, 0.9, 1, 34],
+  ['a', '72%', '10%', -1900, 700, 1, 0.86, -1, 38],
+  ['c', '-10%', '56%', -1500, 660, 0.6, 0.94, 1, 30],
+  ['b', '78%', '54%', -1300, 520, 0.6, 0.92, -1, 33],
+
+  ['e', '-22%', '18%', -1000, 780, 0.3, 0.96, 1, 26],
+  ['a', '70%', '68%', -800, 800, 0.3, 0.94, -1, 29],
+  ['c', '-18%', '74%', -600, 720, 0, 1, 1, 24],
+  ['b', '82%', '14%', -450, 600, 0, 0.97, -1, 27],
+
+  ['e', '-36%', '44%', -60, 820, 0.8, 0.8, 1, 20],
+  ['a', '76%', '36%', 80, 860, 1, 0.76, -1, 23],
+  ['c', '-34%', '74%', 240, 760, 1.4, 0.68, 1, 19],
+  ['b', '86%', '72%', 360, 700, 1.6, 0.62, -1, 21]
+];
+
+const SPARKLES = [
+  ['16%', '18%', -2200, 34, 0.85, '4.2s'],
+  ['72%', '30%', -1600, 26, 0.8, '5.4s'],
+  ['52%', '10%', -3200, 30, 0.6, '6.1s'],
+  ['30%', '46%', -900, 22, 0.75, '4.8s'],
+  ['86%', '48%', -2700, 28, 0.55, '5.9s']
+];
+
+const BRICKS = ['#FFFFFF', '#F3FBF7', '#E9F6F1', '#FFF9E2', '#EFF7FE', '#A8E6D0', '#FFE07A', '#A9CEF7', '#FBC9DD', '#E0BDF5'];
+
+function prng(seed) { let s = seed; return () => { s = (s * 1103515245 + 12345) % 2147483648; return s / 2147483648; }; }
+
+function cloudSet(kind) {
+  return CLOUDS.filter((c) => c[0] === kind).map((c) => ({
+    left: c[1], top: c[2], z: c[3] + 'px', w: c[4] + 'px',
+    blur: c[5] + 'px', op: String(c[6]), flip: String(c[7]),
+    anim: (c[3] < -3800 ? 'driftXFar ' : 'driftX ') + c[8] + 's ease-in-out infinite'
+  }));
+}
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const rand = prng(41);
+    const COUNT = 30, STEP = 190, AMP = 320, WAVE = 1280, START = 700;
+    this.strips = [];
+    for (let i = 0; i < COUNT; i++) {
+      const t = START + i * STEP;
+      const x = AMP * Math.sin(t / WAVE);
+      const slope = (AMP / WAVE) * Math.cos(t / WAVE);
+      const fade = t < 5200 ? 1 : Math.max(0, 1 - (t - 5200) / 1400);
+      if (i === 0) {
+        this.roadStart = {
+          x: x.toFixed(1) + 'px',
+          z: (-(t - 95)).toFixed(0) + 'px',
+          yaw: (-Math.atan(slope) * 180 / Math.PI).toFixed(2) + 'deg'
+        };
+      }
+      this.strips.push({
+        tileIdx: i % 6,
+        x: x.toFixed(1) + 'px',
+        z: (-t).toFixed(0) + 'px',
+        yaw: (-Math.atan(slope) * 180 / Math.PI).toFixed(2) + 'deg',
+        op: fade.toFixed(2)
+      });
+    }
+    this.timers = [];
+    this.cam = { p: 0, target: 0, ry: 0, rx: 0, tx: 0, ty: 0 };
+    this.state = { active: -1, open: null, w: 1440, barsOn: false };
+  }
+
+  componentDidMount() {
+    this.world = document.getElementById('sp-world');
+    this.hero = document.getElementById('sp-hero');
+    this.outro = document.getElementById('sp-outro');
+    this.stage = document.getElementById('sp-stage');
+    this.setState({ w: window.innerWidth || 1440 });
+    this.reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    this.onResize = () => this.setState({ w: window.innerWidth || 1440 });
+    this.onScroll = () => { this.cam.target = this.progress(); this.start(); };
+    this.onMove = (e) => {
+      if (this.reduced || !this.stage) return;
+      const r = this.stage.getBoundingClientRect();
+      this.cam.tx = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2));
+      this.cam.ty = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - 0.5) * 2));
+      this.start();
+    };
+    this.onKey = (e) => { if (e.key === 'Escape' && this.state.open !== null) this.close(); };
+
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('pointermove', this.onMove, { passive: true });
+    window.addEventListener('keydown', this.onKey);
+
+    this.cam.target = this.progress();
+    this.start();
+    this.timers.push(setTimeout(() => this.setState({ barsOn: true }), 400));
+  }
+
+  componentWillUnmount() {
+    this.timers.forEach(clearTimeout);
+    if (this.raf) cancelAnimationFrame(this.raf);
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('pointermove', this.onMove);
+    window.removeEventListener('keydown', this.onKey);
+    document.documentElement.style.overflow = '';
+  }
+
+  progress() {
+    const max = (document.documentElement.scrollHeight || 0) - window.innerHeight;
+    if (max <= 0) return 0;
+    return Math.max(0, Math.min(1, (window.scrollY || 0) / max));
+  }
+
+  start() {
+    if (this.raf) return;
+    const tick = () => {
+      const c = this.cam;
+      c.p += (c.target - c.p) * 0.1;
+      c.ry += (c.tx * 5 - c.ry) * 0.07;
+      c.rx += (-c.ty * 3 - c.rx) * 0.07;
+
+      const z = c.p * TRAVEL;
+      if (this.world) {
+        this.world.style.transform = 'translateZ(' + z.toFixed(1) + 'px) rotateY(' + c.ry.toFixed(3) + 'deg) rotateX(' + (c.rx - 5).toFixed(3) + 'deg)';
+      }
+      if (this.hero) {
+        const o = Math.max(0, 1 - c.p / 0.1);
+        this.hero.style.opacity = o.toFixed(3);
+        this.hero.style.transform = 'translateY(' + (-c.p * 260).toFixed(1) + 'px)';
+        this.hero.style.visibility = o < 0.02 ? 'hidden' : 'visible';
+      }
+      if (this.outro) {
+        const o = Math.max(0, Math.min(1, (c.p - 0.93) / 0.055));
+        this.outro.style.opacity = o.toFixed(3);
+        this.outro.style.pointerEvents = o > 0.6 ? 'auto' : 'none';
+      }
+
+      let active = -1;
+      for (let i = 0; i < STATIONS.length; i++) {
+        const d = z - Math.abs(STATIONS[i].z);
+        if (d > -1150 && d < 380) active = i;
+      }
+      if (active !== this.state.active) this.setState({ active });
+
+      const settled = Math.abs(c.target - c.p) < 0.0004 && Math.abs(c.tx * 5 - c.ry) < 0.02 && Math.abs(-c.ty * 3 - c.rx) < 0.02;
+      if (settled) { this.raf = null; return; }
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  }
+
+  jump(i) {
+    const max = (document.documentElement.scrollHeight || 0) - window.innerHeight;
+    const p = (Math.abs(STATIONS[i].z) - 120) / TRAVEL;
+    window.scrollTo({ top: p * max, behavior: 'smooth' });
+  }
+
+  open(i) {
+    document.documentElement.style.overflow = 'hidden';
+    this.setState({ open: i });
+  }
+  close() {
+    document.documentElement.style.overflow = '';
+    this.setState({ open: null });
+    this.cam.target = this.progress();
+    this.start();
+  }
+
+  bars(sc) {
+    const rand = prng(sc.anomaly ? 31 : 57);
+    const on = this.state.barsOn;
+    const out = [];
+    for (let i = 0; i < 30; i++) {
+      const wave = 0.82 + 0.18 * Math.sin(i / 3.2);
+      const base = (30 + rand() * 9) * wave;
+      const mid = (16 + rand() * 6) * wave;
+      let ai = (5 + rand() * 3) * wave;
+      if (sc.anomaly && i > 26) ai += (i - 26) * 7;
+      if (!sc.anomaly && i > 24) ai += (i - 24) * 1.6;
+      out.push({
+        h1: on ? base.toFixed(1) + '%' : '0%',
+        h2: on ? mid.toFixed(1) + '%' : '0%',
+        h3: on ? ai.toFixed(1) + '%' : '0%',
+        d: (i * 16) + 'ms'
+      });
+    }
+    return out;
+  }
+
+  renderVals() {
+    const st = this.state;
+    const w = st.w;
+    const narrow = w < 1000;
+    const openIdx = st.open;
+    const sc = openIdx === null ? STATIONS[0] : STATIONS[openIdx];
+
+    return {
+      navGap: w < 1180 ? '14px 24px' : '34px',
+      navMenuDisplay: w < 880 ? 'none' : 'flex',
+      railDisplay: narrow ? 'none' : 'flex',
+      h1Size: w < 760 ? '46px' : w < 1100 ? '64px' : '86px',
+      outroSize: w < 760 ? '34px' : '52px',
+      overlayPad: narrow ? '18px' : '40px 48px',
+      panelMax: narrow ? '640px' : '1180px',
+      panelCols: narrow ? '1fr' : '1.45fr 1fr',
+      panelDivider: narrow ? 'none' : '2px solid #1B1F1D',
+      chartH: narrow ? '150px' : '190px',
+      spinDur: st.active >= 0 ? '2.2s' : '7s',
+      spinDurFar: st.active >= 0 ? '3.4s' : '11s',
+      scopeAngle: st.active === 1 ? '-24deg' : st.active >= 0 ? '-12deg' : '-6deg',
+
+      roadStart: this.roadStart,
+      strips1: this.strips.filter((s) => s.tileIdx === 0),
+      strips2: this.strips.filter((s) => s.tileIdx === 1),
+      strips3: this.strips.filter((s) => s.tileIdx === 2),
+      strips4: this.strips.filter((s) => s.tileIdx === 3),
+      strips5: this.strips.filter((s) => s.tileIdx === 4),
+      strips6: this.strips.filter((s) => s.tileIdx === 5),
+
+      cloudsA: cloudSet('a'),
+      cloudsB: cloudSet('b'),
+      cloudsC: cloudSet('c'),
+      cloudsD: cloudSet('d'),
+      cloudsE: cloudSet('e'),
+      sparkles: SPARKLES.map((s) => ({
+        left: s[0], top: s[1], z: s[2] + 'px', w: s[3] + 'px', op: String(s[4]), dur: s[5]
+      })),
+
+      stations: STATIONS.map((s, i) => ({
+        n: s.n, q: s.q, kicker: s.kicker, hint: s.hint,
+        left: s.left, top: s.top, z: s.z + 'px', shadow: s.shadow,
+        opacity: st.active === i ? '1' : '0',
+        pointer: st.active === i ? 'auto' : 'none',
+        open: () => this.open(i)
+      })),
+
+      rail: STATIONS.map((s, i) => ({
+        label: s.kicker,
+        go: () => this.jump(i),
+        bg: st.active === i ? '#38B28E' : '#FFFFFF',
+        fg: st.active === i ? '#1B1F1D' : '#5D6A64',
+        labelOpacity: st.active === i ? '1' : '0.45'
+      })),
+
+      isOpen: openIdx !== null,
+      close: () => this.close(),
+      panel: {
+        q: sc.q, view: sc.view, accent: sc.accent, tint: sc.tint,
+        head: sc.head, body: sc.body, stats: sc.stats, axis: sc.axis,
+        legend: [{ name: 'Compute', color: '#38B28E' }, { name: 'Data', color: '#FFD632' }, { name: 'AI', color: '#F78251' }],
+        bars: this.bars(sc),
+        showFlag: sc.showFlag, flag: sc.flag,
+        tableHead: sc.tableHead,
+        rows: sc.rows.map((r, i) => ({ ...r, deltaColor: r.up ? '#C4501F' : '#1F8F70', d: (i * 60) + 'ms' })),
+        driversTitle: sc.driversTitle,
+        drivers: sc.drivers.map((d, i) => ({ ...d, d: (i * 80) + 'ms' })),
+        actionState: sc.actionState,
+        actions: sc.actions.map((a) => ({
+          label: a.label, value: a.value,
+          bd: a.done ? '#A9DECB' : '#F0E2B4',
+          bg: a.done ? '#F2FBF7' : '#FFFCF0',
+          fill: a.done ? '#A8E6D0' : '#FFFFFF',
+          mark: a.done ? '✓' : '',
+          valueColor: a.done ? '#1F8F70' : '#8A6B00'
+        })),
+        savingsLabel: sc.savingsLabel, savings: sc.savings, cta: sc.cta
+      },
+      followUps: STATIONS.filter((s, i) => i !== openIdx).map((s) => ({
+        label: s.q,
+        go: () => this.open(STATIONS.indexOf(s))
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

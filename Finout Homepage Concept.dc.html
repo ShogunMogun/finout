@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#FFFFFF}
+  body{font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:#1B1F1D}
+  a{color:#1F8F70;text-decoration:none}
+  a:hover{color:#38B28E}
+  ::selection{background:#FFD632;color:#1B1F1D}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes sweep{0%{transform:translateX(-40%);opacity:0}12%{opacity:1}88%{opacity:1}100%{transform:translateX(140%);opacity:0}}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @keyframes drift{0%,100%{transform:translateX(0)}50%{transform:translateX(18px)}}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes pulseRing{0%{transform:scale(.7);opacity:.6}100%{transform:scale(2.2);opacity:0}}
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  @keyframes popIn{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+  @keyframes glowPulse{0%,100%{opacity:.4}50%{opacity:1}}
+  @keyframes twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.3) rotate(20deg)}}
+</style>
+</helmet>
+
+<div style="background:#FFFFFF;color:#1B1F1D;overflow-x:hidden;position:relative">
+
+  <div style="position:relative;z-index:60;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;padding:11px 20px;background:#1B1F1D;font-size:13.5px;color:#DDE3E0">
+    <span style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;background:#FFD632;color:#1B1F1D;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase">New</span>
+    <span>Finout Agents are live — they find the savings and act on them.</span>
+    <a href="#allocate" style="color:#7FE0C0;font-weight:700">See how &rarr;</a>
+  </div>
+
+  <div style="position:sticky;top:0;z-index:55;backdrop-filter:blur(16px);background:rgba(255,255,255,.9);border-bottom:1px solid #EDF0EE">
+    <div style="max-width:1340px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;flex-wrap:{{ navWrap }};gap:{{ navGap }}">
+      <div style="display:flex;align-items:center;gap:8px">
+        <img src="https://www.finout.io/hubfs/finout-logo-colored.svg" alt="Finout" style="height:26px;width:auto;display:block" />
+      </div>
+      <div style="display:{{ navMenuDisplay }};align-items:center;flex-wrap:wrap;gap:12px 24px;font-family:Poppins,sans-serif;font-size:14.5px;font-weight:500;color:#42504A">
+        <span style="display:flex;align-items:center;gap:5px;color:#1F8F70;font-weight:600">AI <span style="font-size:9px;opacity:.7">&#9662;</span></span>
+        <span style="display:flex;align-items:center;gap:5px">Platform <span style="font-size:9px;opacity:.5">&#9662;</span></span>
+        <span style="display:flex;align-items:center;gap:5px">Integrations <span style="font-size:9px;opacity:.5">&#9662;</span></span>
+        <span style="display:flex;align-items:center;gap:5px">Resources <span style="font-size:9px;opacity:.5">&#9662;</span></span>
+        <span style="display:flex;align-items:center;gap:5px">Company <span style="font-size:9px;opacity:.5">&#9662;</span></span>
+        <span>Pricing</span>
+      </div>
+      <div style="margin-left:auto;display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;font-family:Poppins,sans-serif;font-size:14px;font-weight:600">
+        <span style="color:#42504A">Log in</span>
+        <span style="padding:9px 16px;border-radius:9px;border:1.5px solid #1B1F1D;color:#1B1F1D">Free trial</span>
+        <span style="padding:9px 18px;border-radius:9px;background:#38B28E;color:#FFFFFF;border:1.5px solid #1B1F1D">Book a demo</span>
+      </div>
+    </div>
+  </div>
+
+  <section data-screen-label="01 Hero" style="position:relative;padding:0 0 50px">
+    <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
+      <div style="position:absolute;top:-40px;left:50%;width:1500px;height:700px;margin-left:-750px;border-radius:0 0 50% 50%;background:linear-gradient(180deg,#EFF7FE 0%,#F7FBFE 55%,#FFFFFF 100%)"></div>
+      <div style="position:absolute;top:150px;left:4%;width:340px;height:340px;border-radius:50%;background:#FFF8DC;opacity:.75"></div>
+      <div style="position:absolute;top:210px;right:3%;width:300px;height:300px;border-radius:50%;background:#F3EFFE;opacity:.8"></div>
+      <img src="https://www.finout.io/hubfs/cloud-image-small.svg" alt="" style="position:absolute;top:96px;left:7%;width:132px;opacity:.85;animation:drift 13s ease-in-out infinite;display:{{ objectDisplay }}" />
+      <img src="https://www.finout.io/hubfs/cloud-image-small.svg" alt="" style="position:absolute;top:190px;right:6%;width:96px;opacity:.7;transform:scaleX(-1);animation:drift 17s ease-in-out infinite;display:{{ objectDisplay }}" />
+    </div>
+
+    <div style="position:relative;max-width:1010px;margin:0 auto;padding:64px 28px 0;text-align:center">
+      <div style="display:inline-flex;align-items:center;gap:9px;padding:6px 15px 6px 9px;border-radius:30px;background:#FFFFFF;border:1.5px solid #1B1F1D;font-family:Poppins,sans-serif;font-size:12.5px;font-weight:600;color:#1B1F1D">
+        <span style="position:relative;display:inline-flex;width:16px;height:16px;align-items:center;justify-content:center">
+          <span style="position:absolute;inset:0;border-radius:50%;background:rgba(56,178,142,.45);animation:pulseRing 2.4s ease-out infinite"></span>
+          <span style="width:7px;height:7px;border-radius:50%;background:#38B28E"></span>
+        </span>
+        AI FinOps platform for any scale
+      </div>
+
+      <h1 style="font-family:Poppins,sans-serif;margin:24px 0 0;font-size:{{ h1Size }};line-height:1.02;letter-spacing:-.035em;font-weight:600;text-wrap:balance">
+        FinOps for the<br />
+        <span style="position:relative;white-space:nowrap">
+          <span style="position:relative;z-index:2">Agentic Era</span>
+          <span style="position:absolute;left:-2%;right:-2%;bottom:.09em;height:.24em;background:#FFD632;border-radius:4px;z-index:1"></span>
+        </span>
+      </h1>
+
+      <p style="margin:26px auto 0;max-width:660px;font-size:19px;line-height:1.55;color:#525C57;text-wrap:pretty">
+        Don't read another dashboard. <strong style="color:#1B1F1D;font-weight:700">Ask.</strong> Finout's agents ingest every cloud and AI bill, allocate it to the right owner, and act on the savings before your next standup.
+      </p>
+    </div>
+
+    <div style="position:relative;max-width:860px;margin:34px auto 0;padding:0 28px">
+      <div style="border-radius:20px;background:#FFFFFF;border:1.5px solid {{ consoleBd }};padding:16px 18px;box-shadow:0 10px 0 -4px {{ consoleShadow }},0 20px 40px -24px rgba(27,31,29,.28);transition:border-color .4s,box-shadow .4s">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <div style="position:relative;flex:none;width:42px;height:42px;border-radius:13px;background:#E4F5EE;border:1.5px solid #1B1F1D;display:flex;align-items:center;justify-content:center">
+            <div style="width:17px;height:17px;background:#38B28E;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);animation:twinkle 3s ease-in-out infinite"></div>
+            <div style="position:absolute;right:-5px;bottom:-5px;width:15px;height:15px;border-radius:50%;background:#FFD632;border:1.5px solid #1B1F1D"></div>
+          </div>
+          <div style="flex:1;min-width:180px;text-align:left">
+            <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#8A938E;margin-bottom:3px">Ask Billy &middot; your FinOps agent</div>
+            <div style="font-family:Poppins,sans-serif;font-size:17.5px;font-weight:500;color:#1B1F1D;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ typed }}<span style="display:inline-block;width:2.5px;height:19px;vertical-align:-3px;background:#38B28E;animation:blink 1s step-end infinite;margin-left:3px"></span></div>
+          </div>
+          <div style="flex:none;display:flex;align-items:center;gap:8px;padding:11px 19px;border-radius:11px;background:{{ sendBg }};border:1.5px solid #1B1F1D;color:{{ sendFg }};font-family:Poppins,sans-serif;font-size:14px;font-weight:600;transition:background .3s">{{ sendLabel }}</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-top:16px">
+        <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+          <div onClick="{{ c.go }}" style="cursor:pointer;padding:9px 16px;border-radius:22px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font-family:Poppins,sans-serif;font-size:13px;font-weight:500;transition:all .22s" style-hover="border-color:#1B1F1D;transform:translateY(-2px)">{{ c.label }}</div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="position:relative;max-width:1400px;margin:44px auto 0;padding:0 24px">
+      <div style="position:relative;padding-top:70px">
+
+        <div style="display:{{ objectDisplay }};position:absolute;left:1.5%;top:0;width:118px;height:134px;z-index:8;animation:float 7s ease-in-out infinite">
+          <img src="https://www.finout.io/hubfs/windmill_stand.png" alt="" style="position:absolute;left:50%;bottom:0;height:104px;width:auto;margin-left:-9px" />
+          <img src="https://www.finout.io/hubfs/windmill_body.png" alt="" style="position:absolute;left:50%;top:0;width:82px;margin-left:-41px;animation:spin {{ spinDur }} linear infinite" />
+        </div>
+
+        <div style="display:{{ objectDisplay }};position:absolute;right:1.5%;top:2px;width:150px;height:126px;z-index:8">
+          <img src="https://www.finout.io/hubfs/telescope_stand.png" alt="" style="position:absolute;left:50%;bottom:0;height:76px;width:auto;margin-left:-30px" />
+          <img src="https://www.finout.io/hubfs/telescope_body.png" alt="" style="position:absolute;left:12px;top:8px;width:126px;transform-origin:78% 62%;transform:rotate({{ scopeAngle }});transition:transform 1.6s cubic-bezier(.6,0,.2,1)" />
+        </div>
+
+        <sc-if value="{{ scanning }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;left:0;right:0;top:58px;bottom:0;z-index:30;pointer-events:none;overflow:hidden">
+            <div style="position:absolute;top:0;bottom:0;width:220px;background:linear-gradient(90deg,transparent,rgba(255,214,50,.2) 40%,rgba(255,214,50,.55) 50%,rgba(255,214,50,.2) 60%,transparent);animation:sweep 1.7s ease-in-out infinite"></div>
+          </div>
+        </sc-if>
+
+        <div style="display:grid;grid-template-columns:{{ stageCols }};gap:18px;align-items:end">
+
+          <div style="border-radius:16px;border:1.5px solid #38B28E;background:#FFFFFF;padding:16px;box-shadow:0 8px 0 -3px #E4F5EE,0 20px 36px -24px rgba(27,31,29,.24);transform:{{ panelShift }};transform-origin:bottom right">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:13px">
+              <div style="font-family:Poppins,sans-serif;font-size:14px;font-weight:600">Cost Centers</div>
+              <div style="font-size:11px;font-weight:500;color:#8A938E">14 connected</div>
+            </div>
+            <sc-for list="{{ centers }}" as="c" hint-placeholder-count="7">
+              <div style="display:flex;align-items:center;gap:9px;padding:8.5px 0;border-top:1px solid #F2F5F3">
+                <div style="flex:none;width:20px;height:20px;border-radius:6px;border:1.5px solid #1B1F1D;background:{{ c.color }};display:flex;align-items:center;justify-content:center;font-family:Poppins,sans-serif;font-size:9px;font-weight:600;color:#1B1F1D">{{ c.initial }}</div>
+                <div style="flex:1;font-size:12.5px;font-weight:500;color:#2E3A35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.name }}</div>
+                <div style="font-size:12.5px;font-weight:500;color:#5A655F;font-variant-numeric:tabular-nums">{{ c.value }}</div>
+                <div style="font-size:11px;font-weight:700;color:{{ c.deltaColor }};min-width:42px;text-align:right;font-variant-numeric:tabular-nums">{{ c.delta }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="position:relative;order:{{ stackOrder }};border-radius:18px;border:1.5px solid #38B28E;background:#FFFFFF;box-shadow:0 12px 0 -4px #E4F5EE,0 34px 64px -30px rgba(27,31,29,.32);overflow:hidden">
+            <div style="display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid #F2F5F3;flex-wrap:wrap">
+              <div style="display:flex;align-items:center;gap:6px;padding:6px 11px;border-radius:8px;border:1.5px solid #E4E9E6;font-size:12px;font-weight:500;color:#42504A">Select view <span style="font-size:8px;opacity:.6">&#9662;</span></div>
+              <div style="display:flex;align-items:center;gap:6px;padding:6px 11px;border-radius:8px;border:1.5px solid #E4E9E6;font-size:12px;font-weight:500;color:#42504A">Filters <span style="padding:0 6px;border-radius:5px;background:#38B28E;color:#FFF;font-size:10px;font-weight:700">3</span></div>
+              <div style="display:flex;align-items:center;gap:6px;padding:6px 11px;border-radius:8px;background:#FFD632;border:1.5px solid #1B1F1D;font-size:12px;font-weight:600;color:#1B1F1D">
+                <span style="display:inline-block;width:11px;height:11px;background:#1B1F1D;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)"></span>AI Filter
+              </div>
+              <div style="padding:6px 11px;border-radius:8px;border:1.5px solid #E4E9E6;font-size:12px;font-weight:500;color:#42504A">Daily</div>
+              <div style="padding:6px 11px;border-radius:8px;border:1.5px solid #E4E9E6;font-size:12px;font-weight:500;color:#42504A">Last 30 days</div>
+              <div style="margin-left:auto;font-size:11.5px;font-weight:600;color:{{ liveColor }};display:flex;align-items:center;gap:6px">
+                <span style="width:7px;height:7px;border-radius:50%;background:{{ liveColor }};animation:glowPulse 1.8s ease-in-out infinite"></span>{{ liveLabel }}
+              </div>
+            </div>
+
+            <div style="display:flex;gap:6px;padding:11px 16px 0;flex-wrap:wrap">
+              <sc-for list="{{ personas }}" as="p" hint-placeholder-count="4">
+                <div style="padding:5px 13px;border-radius:20px;border:1.5px solid {{ p.bd }};background:{{ p.bg }};font-family:Poppins,sans-serif;font-size:11.5px;font-weight:500;color:{{ p.fg }}">{{ p.name }}</div>
+              </sc-for>
+            </div>
+
+            <div style="display:flex;flex-wrap:{{ statsWrap }};gap:{{ statsGap }};padding:14px 18px 8px">
+              <div>
+                <div style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#8A938E">Total cost</div>
+                <div style="font-family:Poppins,sans-serif;font-size:26px;font-weight:600;letter-spacing:-.025em;margin-top:2px;font-variant-numeric:tabular-nums">{{ totalCost }}</div>
+              </div>
+              <div>
+                <div style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#8A938E">Avg / day</div>
+                <div style="font-family:Poppins,sans-serif;font-size:26px;font-weight:600;letter-spacing:-.025em;margin-top:2px;color:#5A655F;font-variant-numeric:tabular-nums">{{ avgDay }}</div>
+              </div>
+              <div>
+                <div style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#8A938E">AI spend</div>
+                <div style="font-family:Poppins,sans-serif;font-size:26px;font-weight:600;letter-spacing:-.025em;margin-top:2px;color:#D9622F;font-variant-numeric:tabular-nums">{{ aiSpend }}</div>
+              </div>
+              <div style="margin-left:{{ legendMargin }};display:flex;align-items:flex-end;flex-wrap:wrap;gap:11px;padding-bottom:5px">
+                <sc-for list="{{ legend }}" as="l" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:5px;font-size:11px;font-weight:500;color:#6A746F">
+                    <span style="width:10px;height:10px;border-radius:3px;background:{{ l.color }};border:1px solid #1B1F1D"></span>{{ l.name }}
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="position:relative;padding:6px 18px 0;height:188px;display:flex;align-items:flex-end;gap:3px">
+              <sc-for list="{{ bars }}" as="b" hint-placeholder-count="34">
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;gap:1.5px">
+                  <div style="height:{{ b.h3 }};background:#F78251;border-radius:3px 3px 0 0;transition:height .8s cubic-bezier(.2,.8,.2,1);transition-delay:{{ b.d }};box-shadow:{{ b.glow }}"></div>
+                  <div style="height:{{ b.h2 }};background:#FFD632;transition:height .8s cubic-bezier(.2,.8,.2,1);transition-delay:{{ b.d }}"></div>
+                  <div style="height:{{ b.h1 }};background:#38B28E;border-radius:0 0 3px 3px;transition:height .8s cubic-bezier(.2,.8,.2,1);transition-delay:{{ b.d }}"></div>
+                </div>
+              </sc-for>
+              <sc-if value="{{ answered }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;right:7%;top:4px;padding:6px 11px;border-radius:9px;background:#FFD632;border:1.5px solid #1B1F1D;color:#1B1F1D;font-family:Poppins,sans-serif;font-size:11.5px;font-weight:600;white-space:nowrap;animation:popIn .5s cubic-bezier(.3,1.4,.5,1) both">
+                  &#9650; Anomaly &middot; Jul 22
+                </div>
+              </sc-if>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:9px 18px 12px;font-size:10px;font-weight:500;color:#9BA49F;border-bottom:1px solid #F2F5F3">
+              <span>Jun 28</span><span>Jul 06</span><span>Jul 13</span><span>Jul 20</span><span>Jul 27</span>
+            </div>
+
+            <div style="padding:0 18px 16px">
+              <div style="display:grid;grid-template-columns:1.6fr .8fr .8fr .7fr;padding:11px 0 8px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8A938E">
+                <div>Group by &middot; V-Tag: Team</div><div style="text-align:right">Total</div><div style="text-align:right">vs prev</div><div style="text-align:right">% of cost</div>
+              </div>
+              <sc-for list="{{ rows }}" as="r" hint-placeholder-count="5">
+                <div style="display:grid;grid-template-columns:1.6fr .8fr .8fr .7fr;align-items:center;padding:9.5px 0;border-top:1px solid #F2F5F3;animation:rise .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:{{ r.d }}">
+                  <div style="display:flex;align-items:center;gap:9px;min-width:0">
+                    <span style="flex:none;width:10px;height:10px;border-radius:3px;background:{{ r.color }};border:1px solid #1B1F1D"></span>
+                    <span style="font-size:13px;font-weight:500;color:#26302C;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</span>
+                    <span style="flex:none;padding:2.5px 8px;border-radius:6px;background:#E4F5EE;border:1px solid #A9DECB;font-size:10px;font-weight:600;color:#1F8F70">{{ r.tag }}</span>
+                  </div>
+                  <div style="text-align:right;font-size:13px;font-weight:500;font-variant-numeric:tabular-nums">{{ r.total }}</div>
+                  <div style="text-align:right;font-size:12.5px;font-weight:700;color:{{ r.deltaColor }};font-variant-numeric:tabular-nums">{{ r.delta }}</div>
+                  <div style="text-align:right;font-size:12.5px;color:#6A746F;font-variant-numeric:tabular-nums">{{ r.pct }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:{{ sideCols }};align-items:start;gap:16px;transform:{{ panelShift }};transform-origin:bottom left">
+            <div style="border-radius:16px;border:1.5px solid #1B1F1D;background:#FFF9E2;padding:16px;box-shadow:0 8px 0 -3px #FFE9A3">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+                <span style="display:inline-block;width:13px;height:13px;background:#1B1F1D;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)"></span>
+                <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#8A6B00">Billy's answer</div>
+              </div>
+              <div style="font-family:Poppins,sans-serif;font-size:16px;font-weight:600;line-height:1.34;min-height:44px;text-wrap:pretty;color:#1B1F1D">{{ answerHead }}</div>
+              <div style="font-size:13px;line-height:1.5;color:#5D6259;margin-top:8px;text-wrap:pretty">{{ answerBody }}</div>
+              <div style="display:flex;flex-direction:column;gap:7px;margin-top:13px">
+                <sc-for list="{{ drivers }}" as="d" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:10px;background:#FFFFFF;border:1px solid #F0E2B4;animation:rise .45s cubic-bezier(.2,.8,.2,1) both;animation-delay:{{ d.d }}">
+                    <span style="width:9px;height:9px;border-radius:3px;background:{{ d.color }};border:1px solid #1B1F1D;flex:none"></span>
+                    <span style="flex:1;font-size:12.5px;font-weight:500;color:#2E3A35">{{ d.label }}</span>
+                    <span style="font-size:12.5px;font-weight:700;color:{{ d.textColor }};font-variant-numeric:tabular-nums">{{ d.value }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="border-radius:16px;border:1.5px solid #38B28E;background:#FFFFFF;padding:16px;box-shadow:0 8px 0 -3px #E4F5EE,0 20px 36px -24px rgba(27,31,29,.24)">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px">
+                <div style="font-family:Poppins,sans-serif;font-size:14px;font-weight:600">Agent actions</div>
+                <div style="font-size:11px;font-weight:500;color:#8A938E">{{ actionState }}</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <sc-for list="{{ actions }}" as="a" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:9px;padding:10px 11px;border-radius:11px;background:{{ a.bg }};border:1px solid {{ a.bd }}">
+                    <span style="flex:none;width:17px;height:17px;border-radius:50%;border:1.5px solid #1B1F1D;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#1B1F1D;background:{{ a.fill }}">{{ a.mark }}</span>
+                    <span style="flex:1;font-size:12.5px;font-weight:500;color:#2E3A35">{{ a.label }}</span>
+                    <span style="font-size:12px;font-weight:700;color:{{ a.valueColor }};font-variant-numeric:tabular-nums">{{ a.value }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="margin-top:14px;padding-top:13px;border-top:1px solid #F2F5F3;display:flex;align-items:flex-end;justify-content:space-between;gap:12px">
+                <div>
+                  <div style="font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#8A938E">Recovered this month</div>
+                  <div style="font-family:Poppins,sans-serif;font-size:29px;font-weight:600;color:#1F8F70;letter-spacing:-.03em;margin-top:2px;font-variant-numeric:tabular-nums">{{ savingsText }}</div>
+                </div>
+                <div style="width:58px;height:58px;position:relative;flex:none">
+                  <div style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(#38B28E {{ savingsArc }},#EFF3F1 0);border:1.5px solid #1B1F1D;transition:background .5s"></div>
+                  <div style="position:absolute;inset:9px;border-radius:50%;background:#FFF;border:1.5px solid #1B1F1D;display:flex;align-items:center;justify-content:center;font-family:Poppins,sans-serif;font-size:11.5px;font-weight:600;color:#1F8F70">{{ savingsPct }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:center;gap:44px;margin-top:58px;flex-wrap:wrap">
+        <sc-for list="{{ proof }}" as="p" hint-placeholder-count="4">
+          <div style="text-align:center">
+            <div style="font-family:Poppins,sans-serif;font-size:31px;font-weight:600;color:#1B1F1D;letter-spacing:-.03em">{{ p.stat }}</div>
+            <div style="font-size:12px;font-weight:500;color:#8A938E;margin-top:3px">{{ p.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="allocate" data-screen-label="02 Allocation engine" style="position:relative;background:#F4F1FE;padding:88px 0 96px;overflow:hidden">
+    <img src="https://www.finout.io/hubfs/cloud-image-small.svg" alt="" style="position:absolute;top:44px;right:8%;width:110px;opacity:.55;animation:drift 15s ease-in-out infinite;display:{{ objectDisplay }}" />
+
+    <div style="position:relative;max-width:1340px;margin:0 auto;padding:0 28px">
+      <div style="display:grid;grid-template-columns:{{ coverCols }};gap:40px;align-items:end">
+        <div>
+          <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:24px;background:#FFFFFF;border:1.5px solid #1B1F1D;font-family:Poppins,sans-serif;font-size:11.5px;font-weight:600;color:#1B1F1D">
+            <span style="width:7px;height:7px;border-radius:50%;background:#5B57D8"></span>Finout Virtual Tagging&trade; &middot; Patented
+          </div>
+          <h2 style="font-family:Poppins,sans-serif;margin:20px 0 0;font-size:{{ h2Size }};line-height:1.06;letter-spacing:-.035em;font-weight:600;max-width:800px;text-wrap:balance;color:#1B1F1D">
+            Untagged spend, allocated <span style="position:relative;white-space:nowrap"><span style="position:relative;z-index:2">while you watch</span><span style="position:absolute;left:-1%;right:-1%;bottom:.08em;height:.22em;background:#A8E6D0;border-radius:4px;z-index:1"></span></span>
+          </h2>
+          <p style="margin:22px 0 0;max-width:630px;font-size:18px;line-height:1.55;color:#4E5750;text-wrap:pretty">
+            Every FinOps tool shows you a bill. Finout's agents read resource names, commits, and K8s labels, then write the Virtual Tags that put every dollar on an owner &mdash; no code, no engineering tickets.
+          </p>
+        </div>
+        <div style="text-align:{{ coverAlign }};padding-bottom:8px">
+          <div style="font-size:10.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#8A8FA8">Allocation coverage</div>
+          <div style="font-family:Poppins,sans-serif;font-size:68px;font-weight:600;letter-spacing:-.045em;line-height:1;margin-top:4px;color:#1F8F70;font-variant-numeric:tabular-nums">{{ coverageText }}</div>
+          <div style="width:240px;max-width:100%;height:12px;border-radius:8px;background:#FFFFFF;border:1.5px solid #1B1F1D;margin-top:12px;overflow:hidden">
+            <div style="height:100%;width:{{ coverageBar }};background:#38B28E;border-right:1.5px solid #1B1F1D;transition:width 1.1s cubic-bezier(.2,.8,.2,1)"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:{{ allocCols }};gap:24px;margin-top:50px;align-items:stretch">
+
+        <div style="position:relative;border-radius:20px;background:#FFFFFF;border:1.5px solid #1B1F1D;padding:22px;box-shadow:0 10px 0 -3px #DDD8FA">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px;flex-wrap:wrap">
+            <div>
+              <div style="font-family:Poppins,sans-serif;font-size:15px;font-weight:600">MegaBill &middot; unallocated resources</div>
+              <div style="font-size:12px;color:#8A938E;margin-top:2px">{{ blockCaption }}</div>
+            </div>
+            <div style="font-family:Poppins,sans-serif;font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:20px;background:{{ stepPillBg }};border:1.5px solid #1B1F1D;color:#1B1F1D">{{ stepPill }}</div>
+          </div>
+
+          <div style="position:relative;height:{{ blockH }};border-radius:14px;background:#FAFBFA;border:1.5px solid #E9EDEA;overflow:hidden">
+            <sc-if value="{{ assembled }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(4,1fr)">
+                <sc-for list="{{ buckets }}" as="k" hint-placeholder-count="4">
+                  <div style="position:relative;border-right:1px dashed #DCE3DE;padding-top:12px;text-align:center">
+                    <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;color:#1B1F1D">{{ k.name }}</div>
+                    <div style="font-size:10.5px;font-weight:500;color:#9BA49F;margin-top:2px;font-variant-numeric:tabular-nums">{{ k.value }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-for list="{{ blocks }}" as="b" hint-placeholder-count="36">
+              <div style="position:absolute;left:{{ b.x }};top:{{ b.y }};width:{{ b.w }};height:{{ b.h }};border-radius:4px;background:{{ b.c }};border:1.5px solid #1B1F1D;transition:all .95s cubic-bezier(.4,0,.2,1);transition-delay:{{ b.d }};transform:rotate({{ b.r }})">
+                <div style="position:absolute;left:18%;top:-4px;width:26%;height:5px;border-radius:3px 3px 0 0;border:1.5px solid #1B1F1D;border-bottom:none;background:{{ b.c }}"></div>
+                <div style="position:absolute;left:56%;top:-4px;width:26%;height:5px;border-radius:3px 3px 0 0;border:1.5px solid #1B1F1D;border-bottom:none;background:{{ b.c }}"></div>
+              </div>
+            </sc-for>
+            <sc-if value="{{ reading }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
+                <div style="position:absolute;top:0;bottom:0;width:130px;background:linear-gradient(90deg,transparent,rgba(255,214,50,.5),transparent);animation:sweep 1.5s ease-in-out infinite"></div>
+              </div>
+            </sc-if>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:15px">
+            <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+              <div onClick="{{ s.go }}" style="flex:1;min-width:96px;cursor:pointer;padding:11px 12px;border-radius:12px;border:1.5px solid {{ s.bd }};background:{{ s.bg }};transition:all .3s">
+                <div style="font-size:10px;font-weight:700;color:{{ s.numColor }}">0{{ s.n }}</div>
+                <div style="font-family:Poppins,sans-serif;font-size:13px;font-weight:600;color:#1B1F1D;margin-top:2px">{{ s.name }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="border-radius:20px;background:#FFFFFF;border:1.5px solid #1B1F1D;padding:22px;box-shadow:0 10px 0 -3px #DDD8FA;flex:1">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:15px;flex-wrap:wrap">
+              <span style="display:inline-block;width:13px;height:13px;background:#5B57D8;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)"></span>
+              <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#4A46C0">AI-generated Virtual Tags</div>
+              <div style="margin-left:auto;font-size:11px;font-weight:500;color:#8A938E">{{ vtagState }}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ vtags }}" as="v" hint-placeholder-count="4">
+                <div style="border-radius:12px;background:#F7F6FE;border:1px solid #DDD8FA;padding:11px 12px;animation:rise .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:{{ v.d }}">
+                  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                    <span style="padding:2.5px 8px;border-radius:6px;background:#E7E5FD;border:1px solid #C4BEF6;font-size:10.5px;font-weight:600;color:#4A46C0">{{ v.key }}</span>
+                    <span style="font-family:Poppins,sans-serif;font-size:13px;font-weight:600;color:#1B1F1D">{{ v.value }}</span>
+                    <span style="margin-left:auto;font-size:11.5px;font-weight:700;color:{{ v.confColor }}">{{ v.conf }}</span>
+                  </div>
+                  <div style="font-size:11px;color:#7A8580;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ v.rule }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="border-radius:20px;background:#FFD632;border:1.5px solid #1B1F1D;padding:22px;box-shadow:0 10px 0 -3px #E9BE1C">
+            <div style="display:flex;gap:24px;flex-wrap:wrap">
+              <sc-for list="{{ allocStats }}" as="a" hint-placeholder-count="3">
+                <div>
+                  <div style="font-family:Poppins,sans-serif;font-size:29px;font-weight:600;letter-spacing:-.03em;color:#1B1F1D;font-variant-numeric:tabular-nums">{{ a.stat }}</div>
+                  <div style="font-size:11.5px;font-weight:600;color:rgba(27,31,29,.62);margin-top:2px">{{ a.label }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:18px;padding-top:16px;border-top:1.5px solid rgba(27,31,29,.18);display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+              <div style="flex:1;min-width:200px;font-size:14px;font-weight:500;line-height:1.45;color:#1B1F1D;text-wrap:pretty">&ldquo;The best allocation engine in the market.&rdquo; &mdash; now a demo, not a claim.</div>
+              <div style="flex:none;padding:12px 20px;border-radius:11px;background:#1B1F1D;color:#FFFFFF;font-family:Poppins,sans-serif;font-size:14px;font-weight:600;cursor:pointer">Run it on my bill</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#FFFFFF;padding:76px 0 88px">
+    <div style="max-width:1340px;margin:0 auto;padding:0 28px">
+      <div style="border-radius:24px;background:#E9F6F1;border:1.5px solid #1B1F1D;box-shadow:0 10px 0 -3px #C9E8DC;padding:42px 44px;display:grid;grid-template-columns:{{ ctaCols }};gap:34px;align-items:center">
+        <div>
+          <div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#1F8F70">Submission &middot; supporting material</div>
+          <div style="font-family:Poppins,sans-serif;font-size:33px;font-weight:600;letter-spacing:-.03em;margin-top:8px;color:#1B1F1D">The rest of the assignment</div>
+          <div style="font-size:15.5px;color:#4E5750;margin-top:8px;max-width:580px;text-wrap:pretty">Two on-brand LinkedIn banners with the exact generation prompts, plus the process write-up &mdash; tools, iterations, and how long it actually took.</div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="./Finout LinkedIn Banners.dc.html" style="padding:14px 22px;border-radius:11px;background:#38B28E;border:1.5px solid #1B1F1D;color:#FFFFFF;font-family:Poppins,sans-serif;font-size:14px;font-weight:600">LinkedIn banners &rarr;</a>
+          <a href="./Finout Process.dc.html" style="padding:14px 22px;border-radius:11px;background:#FFFFFF;border:1.5px solid #1B1F1D;color:#1B1F1D;font-family:Poppins,sans-serif;font-size:14px;font-weight:600">Process &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}">
+    <div style="position:fixed;right:22px;bottom:22px;z-index:200;width:334px;border-radius:18px;background:#FFFFFF;border:1.5px solid #1B1F1D;box-shadow:0 10px 0 -3px #FFD632,0 26px 50px -20px rgba(27,31,29,.3);padding:17px 18px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px">
+        <span style="display:inline-block;width:12px;height:12px;background:#FFD632;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)"></span>
+        <div style="font-family:Poppins,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#1B1F1D">The direction</div>
+        <div onClick="{{ hideNotes }}" style="margin-left:auto;cursor:pointer;font-size:17px;color:#8A938E;line-height:1">&times;</div>
+      </div>
+      <div style="font-size:13px;line-height:1.55;color:#4E5750;text-wrap:pretty">
+        The homepage stops <strong style="color:#1B1F1D">describing</strong> the product and starts <strong style="color:#1B1F1D">running</strong> it. Ask Billy a real cost question and the illustrated world reacts &mdash; the pinwheel spins up, the telescope scans, the MegaBill rebuilds, V-Tags land on owners. Fold two turns the &ldquo;best allocation engine&rdquo; claim into a watchable proof.
+      </div>
+      <div style="font-size:12px;line-height:1.5;color:#8A938E;margin-top:10px;padding-top:10px;border-top:1px solid #F0F3F1">
+        Same cast, same outlines, same palette &mdash; the evolution is behaviour, not a redraw.
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ notesHidden }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ openNotes }}" style="position:fixed;right:22px;bottom:22px;z-index:200;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 17px;border-radius:24px;background:#FFFFFF;border:1.5px solid #1B1F1D;box-shadow:0 6px 0 -2px #FFD632;font-family:Poppins,sans-serif;font-size:12.5px;font-weight:600;color:#1B1F1D">
+      <span style="display:inline-block;width:11px;height:11px;background:#FFD632;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)"></span>The direction
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showDirectionNote&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Presentation&quot;}}">
+const SCENARIOS = [
+  {
+    label: 'Why did AI spend jump 41%?',
+    query: 'Why did our AI bill jump 41% last week?',
+    head: 'Anthropic tokens on Support Copilot — not a pricing change.',
+    body: 'Traffic tripled after the July 18 release. Three teams share the endpoint, so the cost never landed on an owner.',
+    drivers: [
+      { label: 'Support Copilot · claude-sonnet', value: '+$104K', color: '#F78251', textColor: '#C4501F' },
+      { label: 'Retry storm · 14% of calls', value: '+$31K', color: '#F379AC', textColor: '#B93E75' },
+      { label: 'Untagged inference jobs', value: '$62K', color: '#FFD632', textColor: '#8A6B00' }
+    ],
+    rows: [
+      { name: 'Support Engineering', tag: 'team', total: '$418,220', delta: '+41.2%', up: true, pct: '16.8%', color: '#F78251' },
+      { name: 'Platform', tag: 'team', total: '$392,640', delta: '-3.1%', up: false, pct: '15.8%', color: '#38B28E' },
+      { name: 'Data & ML', tag: 'team', total: '$351,900', delta: '+8.4%', up: true, pct: '14.2%', color: '#FFD632' },
+      { name: 'Checkout', tag: 'team', total: '$208,410', delta: '-11.6%', up: false, pct: '8.4%', color: '#4CA2FF' },
+      { name: 'Others (46)', tag: 'auto', total: '$1,110,760', delta: '+2.0%', up: true, pct: '44.8%', color: '#C9D2CD' }
+    ],
+    actions: [
+      { label: 'Cap retries on Support Copilot', value: '$31K/mo', done: true },
+      { label: 'Split shared inference by request', value: '3 owners', done: true },
+      { label: 'Budget guard at $340K', value: 'Armed', done: false }
+    ],
+    savings: 184, arc: '68%', pct: '68%', anomaly: true, aiSpend: '$248K'
+  },
+  {
+    label: 'Who owns our untagged spend?',
+    query: 'Which teams are burning untagged spend?',
+    head: '$612K sits untagged — 24.7% of the bill.',
+    body: 'Mostly Kubernetes namespaces and EBS volumes with no owner label. Virtual Tags can claim 96% of it without a single code change.',
+    drivers: [
+      { label: 'K8s namespaces · no owner', value: '$284K', color: '#FFD632', textColor: '#8A6B00' },
+      { label: 'Available EBS volumes', value: '$96K', color: '#F78251', textColor: '#C4501F' },
+      { label: 'Shared Datadog + Snowflake', value: '$232K', color: '#5B57D8', textColor: '#4A46C0' }
+    ],
+    rows: [
+      { name: 'Unallocated', tag: 'null', total: '$612,340', delta: '+6.9%', up: true, pct: '24.7%', color: '#C9D2CD' },
+      { name: 'Platform', tag: 'team', total: '$392,640', delta: '-3.1%', up: false, pct: '15.8%', color: '#38B28E' },
+      { name: 'Data & ML', tag: 'team', total: '$351,900', delta: '+8.4%', up: true, pct: '14.2%', color: '#FFD632' },
+      { name: 'Growth', tag: 'team', total: '$164,180', delta: '-2.2%', up: false, pct: '6.6%', color: '#F379AC' },
+      { name: 'Others (51)', tag: 'auto', total: '$960,870', delta: '+1.4%', up: true, pct: '38.7%', color: '#C9D2CD' }
+    ],
+    actions: [
+      { label: 'Generate V-Tags from K8s labels', value: '96% claimed', done: true },
+      { label: 'Reallocate shared observability', value: '7 teams', done: true },
+      { label: 'Delete 214 idle EBS volumes', value: '$96K/mo', done: false }
+    ],
+    savings: 96, arc: '41%', pct: '41%', anomaly: false, aiSpend: '$176K'
+  },
+  {
+    label: 'Forecast Q3 if agent traffic doubles',
+    query: 'Forecast Q3 if agent traffic doubles',
+    head: 'Q3 lands at $9.1M — $1.4M over plan.',
+    body: 'Doubling agent traffic is the whole gap. Commitment coverage on inference is the lever, not headcount on FinOps.',
+    drivers: [
+      { label: 'Agent inference · linear x2', value: '+$1.1M', color: '#F78251', textColor: '#C4501F' },
+      { label: 'Vector store growth', value: '+$210K', color: '#FFD632', textColor: '#8A6B00' },
+      { label: 'Committed-use discount gap', value: '-$480K', color: '#38B28E', textColor: '#1F8F70' }
+    ],
+    rows: [
+      { name: 'Projected Q3 total', tag: 'trend', total: '$9,104,000', delta: '+18.2%', up: true, pct: '100%', color: '#FFD632' },
+      { name: 'Agent inference', tag: 'vtag', total: '$2,240,000', delta: '+104%', up: true, pct: '24.6%', color: '#F78251' },
+      { name: 'Compute · committed', tag: 'vtag', total: '$3,180,000', delta: '+4.1%', up: true, pct: '34.9%', color: '#38B28E' },
+      { name: 'Storage & data', tag: 'vtag', total: '$1,402,000', delta: '+9.8%', up: true, pct: '15.4%', color: '#4CA2FF' },
+      { name: 'Everything else', tag: 'auto', total: '$2,282,000', delta: '+1.9%', up: true, pct: '25.1%', color: '#C9D2CD' }
+    ],
+    actions: [
+      { label: 'Buy inference commitments', value: '$480K/q', done: true },
+      { label: 'Right-size vector store tier', value: '$118K/q', done: true },
+      { label: 'Alert owners at 80% of plan', value: 'Armed', done: false }
+    ],
+    savings: 598, arc: '82%', pct: '82%', anomaly: false, aiSpend: '$412K'
+  }
+];
+
+const CENTERS = [
+  { name: 'AWS', initial: 'aw', value: '$1.42M', delta: '+2.1%', up: true, color: '#FFD632' },
+  { name: 'Kubernetes', initial: 'k8', value: '$486K', delta: '-4.8%', up: false, color: '#4CA2FF' },
+  { name: 'Anthropic', initial: 'A', value: '$186K', delta: '+41%', up: true, color: '#F78251' },
+  { name: 'GCP', initial: 'gc', value: '$154K', delta: '+0.4%', up: true, color: '#A8E6D0' },
+  { name: 'Snowflake', initial: 'sf', value: '$122K', delta: '-9.2%', up: false, color: '#DCEBFB' },
+  { name: 'OpenAI', initial: 'oa', value: '$62K', delta: '+18%', up: true, color: '#E7E5FD' },
+  { name: 'Datadog', initial: 'dd', value: '$49K', delta: '-1.1%', up: false, color: '#FBE0EC' }
+];
+
+const STEPS = [
+  { n: 1, name: 'Ingest', caption: '36 resource groups · $612K with no owner', pill: 'raw bill', bg: '#F2F5F3' },
+  { n: 2, name: 'Read', caption: 'Agents parse names, commits, K8s labels', pill: 'scanning', bg: '#FFF6D6' },
+  { n: 3, name: 'Tag', caption: 'Virtual Tags written — no code, no tickets', pill: 'tagging', bg: '#E7E5FD' },
+  { n: 4, name: 'Allocate', caption: 'Every dollar on an owner. Shared costs split.', pill: 'allocated', bg: '#E4F5EE' }
+];
+
+const BUCKETS = [
+  { name: 'Platform', value: '$392K', fill: '#A8E6D0' },
+  { name: 'Data & ML', value: '$351K', fill: '#FFE07A' },
+  { name: 'Support Eng', value: '$418K', fill: '#FBAF92' },
+  { name: 'Checkout', value: '$208K', fill: '#A9CEF7' }
+];
+
+const VTAGS = [
+  { key: 'team', value: 'platform-core', conf: '99%', rule: 'k8s.label.squad IN (core, infra-net) OR name ~ "plat-*"' },
+  { key: 'team', value: 'data-ml', conf: '97%', rule: 'account = 4471 AND service IN (SageMaker, Databricks, Bedrock)' },
+  { key: 'team', value: 'support-eng', conf: '94%', rule: 'anthropic.workspace = "support-copilot" → split by request_id' },
+  { key: 'env', value: 'production', conf: '99%', rule: 'tag.Environment ~ "prod|prd" OR cluster ~ "*-prod-*"' }
+];
+
+const PERSONAS = ['Startup', 'Engineer', 'Finance', 'Executive'];
+
+function prng(seed) { let s = seed; return () => { s = (s * 1103515245 + 12345) % 2147483648; return s / 2147483648; }; }
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const rand = prng(97);
+    this.blocks = [];
+    for (let i = 0; i < 36; i++) {
+      const b = Math.floor(i / 9), k = i % 9;
+      this.blocks.push({
+        sx: 6 + rand() * 82, sy: 10 + rand() * 74, sr: (rand() * 22 - 11),
+        tx: b * 25 + 5.5 + (k % 3) * 5.4, ty: 36 + Math.floor(k / 3) * 15,
+        bucket: b, delay: (i % 12) * 45 + b * 30
+      });
+    }
+    this.timers = [];
+    this.state = { s: 0, phase: 0, typed: '', rows: 0, drivers: 0, savings: 0, step: 0, notes: null, barsOn: false, w: 1340 };
+  }
+
+  measure() {
+    const w = window.innerWidth || 1340;
+    if (w !== this.state.w) this.setState({ w });
+  }
+
+  componentDidMount() {
+    this.measure();
+    this.onResize = () => this.measure();
+    window.addEventListener('resize', this.onResize);
+    this.t(() => this.setState({ barsOn: true }), 450);
+    this.t(() => this.run(0), 1500);
+    const el = document.getElementById('allocate');
+    if (el && 'IntersectionObserver' in window) {
+      this.io = new IntersectionObserver((es) => {
+        es.forEach((e) => { if (e.isIntersecting && this.state.step === 0) this.cycleSteps(); });
+      }, { threshold: 0.25 });
+      this.io.observe(el);
+    }
+  }
+
+  componentWillUnmount() {
+    this.timers.forEach(clearTimeout);
+    if (this.io) this.io.disconnect();
+    if (this.onResize) window.removeEventListener('resize', this.onResize);
+  }
+  t(fn, ms) { this.timers.push(setTimeout(fn, ms)); }
+  clear() { this.timers.forEach(clearTimeout); this.timers = []; }
+
+  cycleSteps() { [1, 2, 3].forEach((i) => this.t(() => this.setState({ step: i }), i * 1900)); }
+  goStep(i) { this.clear(); this.setState({ step: i }); }
+
+  run(i) {
+    this.clear();
+    const sc = SCENARIOS[i];
+    this.setState({ s: i, phase: 1, typed: '', rows: 0, drivers: 0, savings: 0 });
+    const q = sc.query;
+    for (let c = 1; c <= q.length; c++) this.t(() => this.setState({ typed: q.slice(0, c) }), c * 26);
+    const after = q.length * 26 + 260;
+    this.t(() => this.setState({ phase: 2 }), after);
+    this.t(() => this.setState({ phase: 3, barsOn: false }), after + 1500);
+    this.t(() => this.setState({ barsOn: true }), after + 1620);
+    this.t(() => this.setState({ phase: 4 }), after + 2000);
+    [1, 2, 3].forEach((n) => this.t(() => this.setState({ drivers: n }), after + 2000 + n * 180));
+    [1, 2, 3, 4, 5].forEach((n) => this.t(() => this.setState({ rows: n }), after + 2200 + n * 130));
+    const target = sc.savings;
+    for (let k = 1; k <= 26; k++) this.t(() => this.setState({ savings: Math.round(target * (k / 26)) }), after + 2600 + k * 42);
+    this.t(() => this.run((i + 1) % SCENARIOS.length), after + 12000);
+  }
+
+  bars(sc) {
+    const rand = prng(31);
+    const on = this.state.barsOn;
+    const answered = this.state.phase >= 4;
+    const out = [];
+    for (let i = 0; i < 34; i++) {
+      const wave = 0.82 + 0.18 * Math.sin(i / 3.4);
+      const base = (30 + rand() * 9) * wave;
+      const mid = (16 + rand() * 6) * wave;
+      let ai = (5 + rand() * 3) * wave;
+      if (sc.anomaly && i > 26) ai += (i - 26) * 4.4;
+      if (!sc.anomaly && i > 28) ai += (i - 28) * 1.4;
+      const hot = sc.anomaly && i > 26 && answered;
+      out.push({
+        h1: on ? base.toFixed(1) + '%' : '0%',
+        h2: on ? mid.toFixed(1) + '%' : '0%',
+        h3: on ? ai.toFixed(1) + '%' : '0%',
+        glow: hot ? '0 0 0 1.5px #1B1F1D' : 'none',
+        d: (i * 14) + 'ms'
+      });
+    }
+    return out;
+  }
+
+  renderVals() {
+    const st = this.state;
+    const sc = SCENARIOS[st.s];
+    const scanning = st.phase === 2 || st.phase === 3;
+    const answered = st.phase >= 4;
+
+    const w = st.w;
+    const stacked = w < 1180;
+    const narrow = w < 900;
+    const notesOpen = st.notes === null ? w >= 1120 : st.notes;
+
+    const stepIdx = st.step;
+    const stepDef = STEPS[stepIdx];
+    const assembled = stepIdx >= 2;
+    const coverage = [62, 62, 84, 98][stepIdx];
+
+    return {
+      navWrap: w < 1240 ? 'wrap' : 'nowrap',
+      navGap: w < 1240 ? '14px 24px' : '34px',
+      navMenuDisplay: w < 760 ? 'none' : 'flex',
+      h1Size: narrow ? '44px' : w < 1100 ? '60px' : '78px',
+      h2Size: narrow ? '34px' : w < 1100 ? '44px' : '58px',
+      stageCols: stacked ? '1fr' : '1fr 1.85fr 1fr',
+      sideCols: stacked && !narrow ? '1fr 1fr' : '1fr',
+      panelShift: stacked ? 'none' : 'translateY(26px) scale(.955)',
+      stackOrder: stacked ? -1 : 0,
+      statsWrap: w < 1420 ? 'wrap' : 'nowrap',
+      statsGap: w < 1420 ? '14px 24px' : '28px',
+      legendMargin: w < 1420 ? '0' : 'auto',
+      coverCols: stacked ? '1fr' : '1fr auto',
+      coverAlign: stacked ? 'left' : 'right',
+      allocCols: stacked ? '1fr' : '1.05fr 1fr',
+      ctaCols: narrow ? '1fr' : '1fr auto',
+      objectDisplay: narrow ? 'none' : 'block',
+      blockH: narrow ? '240px' : '330px',
+
+      typed: st.typed || 'Ask anything about your cloud and AI spend…',
+      sendLabel: st.phase === 1 ? 'Typing' : scanning ? 'Thinking' : answered ? 'Answered' : 'Ask',
+      sendBg: answered ? '#E4F5EE' : scanning ? '#FFD632' : '#38B28E',
+      sendFg: answered ? '#1F8F70' : scanning ? '#1B1F1D' : '#FFFFFF',
+      consoleBd: answered ? '#38B28E' : scanning ? '#1B1F1D' : '#1B1F1D',
+      consoleShadow: answered ? '#E4F5EE' : scanning ? '#FFD632' : '#E4F5EE',
+      spinDur: answered ? '1.1s' : scanning ? '2.2s' : '7s',
+      scopeAngle: scanning ? '-24deg' : answered ? '8deg' : '-6deg',
+      scanning,
+      answered,
+      liveColor: scanning ? '#C4901F' : answered ? '#1F8F70' : '#9BA49F',
+      liveLabel: scanning ? 'agent reading 14 sources' : answered ? 'view rebuilt by Billy' : 'live',
+      totalCost: '$2,481,930',
+      avgDay: '$82,731',
+      aiSpend: sc.aiSpend,
+      personas: PERSONAS.map((p, i) => ({
+        name: p,
+        bd: i === 1 ? '#1B1F1D' : '#E4E9E6',
+        bg: i === 1 ? '#E4F5EE' : '#FFFFFF',
+        fg: i === 1 ? '#1B1F1D' : '#7A8580'
+      })),
+      legend: [{ name: 'Compute', color: '#38B28E' }, { name: 'Data', color: '#FFD632' }, { name: 'AI', color: '#F78251' }],
+      bars: this.bars(sc),
+      centers: CENTERS.map((c) => ({ ...c, deltaColor: c.up ? '#C4501F' : '#1F8F70' })),
+      rows: sc.rows.slice(0, st.rows).map((r, i) => ({ ...r, deltaColor: r.up ? '#C4501F' : '#1F8F70', d: (i * 40) + 'ms' })),
+      answerHead: answered ? sc.head : scanning ? 'Reading 14 cost centers and 3.2B line items…' : 'Pick a question, or type your own.',
+      answerBody: answered ? sc.body : scanning ? 'Correlating releases, commits and K8s labels against the bill.' : 'Billy answers from your live MegaBill — not a canned demo.',
+      drivers: (answered ? sc.drivers.slice(0, st.drivers) : []).map((d, i) => ({ ...d, d: (i * 70) + 'ms' })),
+      actionState: answered ? '2 applied · 1 armed' : 'waiting',
+      actions: (answered ? sc.actions : []).map((a) => ({
+        label: a.label, value: a.value,
+        bd: a.done ? '#A9DECB' : '#F0E2B4',
+        bg: a.done ? '#F2FBF7' : '#FFFCF0',
+        fill: a.done ? '#38B28E' : '#FFFFFF',
+        mark: a.done ? '✓' : '',
+        valueColor: a.done ? '#1F8F70' : '#8A6B00'
+      })),
+      savingsText: '$' + st.savings + 'K',
+      savingsArc: answered ? sc.arc : '0%',
+      savingsPct: answered ? sc.pct : '—',
+      chips: SCENARIOS.map((s, i) => ({
+        label: s.label,
+        go: () => this.run(i),
+        bd: i === st.s ? '#1B1F1D' : '#DDE3E0',
+        bg: i === st.s ? '#FFF6D6' : '#FFFFFF',
+        fg: i === st.s ? '#1B1F1D' : '#5A655F'
+      })),
+      proof: [
+        { stat: '98%', label: 'of spend allocated' },
+        { stat: '5 min', label: 'to first insight' },
+        { stat: '3.2B', label: 'line items / day' },
+        { stat: '$400M+', label: 'cloud spend managed' }
+      ],
+
+      blocks: this.blocks.map((b) => {
+        const tagged = stepIdx >= 2;
+        return {
+          x: (tagged ? b.tx : b.sx).toFixed(2) + '%',
+          y: (tagged ? b.ty : b.sy).toFixed(2) + '%',
+          w: '4.6%', h: '11%',
+          r: tagged ? '0deg' : b.sr.toFixed(1) + 'deg',
+          c: tagged ? BUCKETS[b.bucket].fill : '#EDF1EE',
+          d: (tagged ? b.delay : 0) + 'ms'
+        };
+      }),
+      buckets: BUCKETS,
+      assembled,
+      reading: stepIdx === 1,
+      blockCaption: stepDef.caption,
+      stepPill: stepDef.pill,
+      stepPillBg: stepDef.bg,
+      steps: STEPS.map((s, i) => ({
+        n: s.n, name: s.name, go: () => this.goStep(i),
+        bd: i === stepIdx ? '#1B1F1D' : '#E4E9E6',
+        bg: i === stepIdx ? s.bg : '#FFFFFF',
+        numColor: i === stepIdx ? '#1B1F1D' : '#AEB8B3'
+      })),
+      coverageText: coverage + '%',
+      coverageBar: coverage + '%',
+      vtagState: stepIdx >= 2 ? '4 written · 0 tickets' : 'idle',
+      vtags: (stepIdx >= 2 ? VTAGS : []).map((v, i) => ({
+        ...v, d: (i * 110) + 'ms',
+        confColor: parseInt(v.conf) > 96 ? '#1F8F70' : '#8A6B00'
+      })),
+      allocStats: [
+        { stat: assembled ? '98%' : '62%', label: 'allocated' },
+        { stat: assembled ? '0' : '41', label: 'eng tickets needed' },
+        { stat: assembled ? '9s' : '6 wks', label: 'time to coverage' }
+      ],
+
+      showNotes: notesOpen,
+      notesHidden: !notesOpen,
+      hideNotes: () => this.setState({ notes: false }),
+      openNotes: () => this.setState({ notes: true })
+    };
+  }
+}
+</script>
+</body>
+</html>
