@@ -956,16 +956,7 @@ class Component extends DCLogic {
     };
     // smoothed wheel scrolling: the page eases to the wheel's target instead of
     // stepping, so the 3D travel reads as one continuous move
-    this.onWheel = (e) => {
-      if (this.reduced || this.state.open !== null || e.ctrlKey) return;
-      const max = (document.documentElement.scrollHeight || 0) - window.innerHeight;
-      if (max <= 0) return;
-      e.preventDefault();
-      const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1;
-      const base = this.sTarget == null ? (window.scrollY || 0) : this.sTarget;
-      this.sTarget = Math.max(0, Math.min(max, base + e.deltaY * unit * 0.68));
-      this.gliding = true;
-    };
+    this.onWheel = (e) => { /* wheel hijack disabled: use native scroll to prevent competing-glide jump */ };
     this.onMove = (e) => {
       if (this.reduced || !this.stage) return;
       const r = this.stage.getBoundingClientRect();
