@@ -2805,7 +2805,15 @@ class Component extends DCLogic {
     window.addEventListener('scroll', sync, { passive: true });
     window.addEventListener('resize', measure);
     measure();
-    setTimeout(measure, 400);
+    // re-measure after late-loading content (videos, fonts, 3D, images) settles,
+    // otherwise pin height/top are stale and the section engages late then snaps
+    [200, 400, 800, 1500, 3000].forEach((ms) => setTimeout(measure, ms));
+    window.addEventListener('load', measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure).catch(() => {});
+    pin.querySelectorAll('img, video').forEach((el) => {
+      el.addEventListener('load', measure);
+      el.addEventListener('loadeddata', measure);
+    });
   }
 
   navItems(list, openIdx) {
